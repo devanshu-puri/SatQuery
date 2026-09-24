@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+earthengine-api
+pydantic
+python-dotenv
+rasterio
+shapely
+pyproj
+tifffile
+Pillow
+python-multipart
+reportlab
+numpy

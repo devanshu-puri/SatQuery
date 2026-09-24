@@ -1,0 +1,75 @@
+"""
+Sample Dataset Loader for Offline Zero-Setup Demo Mode.
+Loads pre-cached benchmark samples from BigEarthNet, VRSBench, CDVQA, and Cartosat/RISAT.
+"""
+
+import os
+from typing import List, Dict, Any
+from geospatial import parse_geotiff
+
+SAMPLES_DIR = os.path.join(os.path.dirname(__file__), "samples")
+
+DEMO_SAMPLES = [
+    {
+        "id": "sample_optical_vqa",
+        "title": "ISRO Cartosat-2S Optical Scene (VRSBench / RSVQA)",
+        "task_recommended": "single_image_vqa",
+        "query_recommended": "What is the agricultural crop condition and land use in this scene?",
+        "file_primary": "cartosat_optical_bengaluru.tif",
+        "file_secondary": None,
+        "description": "High-resolution optical scene over Bengaluru Urban with active vegetation and built-up structures.",
+        "modality": "Optical RGB (Cartosat-2S)",
+        "provenance": "ISRO Bhuvan / VRSBench Benchmark Subset"
+    },
+    {
+        "id": "sample_grounding",
+        "title": "Transportation & Forest Grounding (VRSBench)",
+        "task_recommended": "region_grounding",
+        "query_recommended": "Locate all dense vegetation areas and built structures",
+        "file_primary": "cartosat_optical_bengaluru.tif",
+        "file_secondary": None,
+        "description": "Text-guided region localization predicting EPSG:4326 GeoJSON vector bounding polygons.",
+        "modality": "Optical RGB",
+        "provenance": "VRSBench (arXiv:2311.13788)"
+    },
+    {
+        "id": "sample_bitemporal_change",
+        "title": "Bi-Temporal Urban & Vegetation Change (CDVQA / LEVIR-CD)",
+        "task_recommended": "bitemporal_change",
+        "query_recommended": "Compare before and after satellite images to detect significant land-cover change",
+        "file_primary": "bitemporal_t1_2023.tif",
+        "file_secondary": "bitemporal_t2_2024.tif",
+        "description": "Co-registered pair (2023 vs 2024) revealing structural expansion and vegetation clearance.",
+        "modality": "Bi-Temporal Optical Pair (T1, T2)",
+        "provenance": "CDVQA / LEVIR-CD Benchmark"
+    },
+    {
+        "id": "sample_optical_sar_fusion",
+        "title": "Optical + SAR Radar Fusion (BigEarthNet-MM Sentinel-1/2)",
+        "task_recommended": "optical_sar_fusion",
+        "query_recommended": "Perform optical and SAR radar cross-modal fusion for all-weather water mapping",
+        "file_primary": "cartosat_optical_bengaluru.tif",
+        "file_secondary": "sentinel1_sar_vv_vh.tif",
+        "description": "Co-registered Optical Sentinel-2 + Sentinel-1 C-band SAR (VV/VH) dual-pol backscatter.",
+        "modality": "Cross-Modal (Optical + Radar SAR)",
+        "provenance": "BigEarthNet-MM (arXiv:1902.06148)"
+    }
+]
+
+def get_demo_samples_list() -> List[Dict[str, Any]]:
+    """Returns catalog of demo samples with parsed metadata and previews."""
+    results = []
+    for s in DEMO_SAMPLES:
+        p_path = os.path.join(SAMPLES_DIR, s["file_primary"])
+        s_path = os.path.join(SAMPLES_DIR, s["file_secondary"]) if s["file_secondary"] else None
+
+        p_meta = parse_geotiff(p_path) if os.path.exists(p_path) else None
+        s_meta = parse_geotiff(s_path) if s_path and os.path.exists(s_path) else None
+
+        results.append({
+            **s,
+            "primary_metadata": p_meta,
+            "secondary_metadata": s_meta,
+            "preview_url": p_meta.get("preview_url") if p_meta else None
+        })
+    return results
