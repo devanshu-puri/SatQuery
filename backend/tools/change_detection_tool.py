@@ -26,7 +26,6 @@ class BiTemporalChangeDetectionTool:
         """
         Executes bi-temporal change analysis on T1 and T2 arrays.
         """
-        # Ensure dimensions match
         h = min(rgb_t1.shape[0], rgb_t2.shape[0])
         w = min(rgb_t1.shape[1], rgb_t2.shape[1])
         t1 = rgb_t1[:h, :w].astype(float)
@@ -102,7 +101,7 @@ class BiTemporalChangeDetectionTool:
 
         # Generate Change-VQA natural language synthesis
         explanation = (
-            f"Bi-Temporal Change Analysis (T1 → T2): Detected significant surface changes covering "
+            f"Bi-Temporal Change Analysis (T1 -> T2): Detected significant surface changes covering "
             f"{change_percentage}% of the AOI. Spectral difference signatures indicate transition in "
             f"vegetation biomass and new structural developments. {len(change_boxes)} major change zones identified."
         )

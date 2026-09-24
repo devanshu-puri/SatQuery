@@ -70,18 +70,18 @@ class AgentController:
         if mode_override:
             task_type = mode_override
             rationale = f"Explicitly requested task mode override: '{mode_override}'."
-        elif is_sar_opt_pair or any(w in q_lower for w in ["fusion", "sar", "radar", "cross-modal", "all-weather"]):
+        elif is_sar_opt_pair or any(w in q_lower for w in ["fusion", "sar", "radar", "cross-modal", "all-weather", "optical + sar", "optical and sar"]):
             task_type = "optical_sar_fusion"
             rationale = "Cross-modal Optical + SAR radar inputs and/or query requesting multi-sensor fusion."
-        elif is_temporal_pair or any(w in q_lower for w in ["change", "difference", "compare", "evolution", "before and after", "temporal"]):
+        elif is_temporal_pair or any(w in q_lower for w in ["change", "changed", "difference", "compare", "evolution", "before and after", "temporal"]):
             task_type = "bitemporal_change"
             rationale = "Bi-temporal multi-date satellite scenes detected and/or change-detection query semantics."
-        elif any(w in q_lower for w in ["where", "locate", "ground", "find", "detect", "bounding", "segment", "outline", "box"]):
+        elif any(w in q_lower for w in ["where", "locate", "ground", "find", "detect", "bounding", "segment", "mask", "exact", "exact region", "outline", "box", "show exact"]):
             task_type = "region_grounding"
-            rationale = "Text-guided spatial feature localization requiring vector bounding polygons."
+            rationale = "Text-guided spatial feature localization requiring vector bounding polygons / segmentation masks."
         else:
             task_type = "single_image_vqa"
-            rationale = "Single-scene Visual Question Answering on optical/multispectral reflectance."
+            rationale = "Single-scene Visual Question Answering / classification / area measurement / explainable analysis."
 
         # Step 3: Model & Adapter Selection
         if task_type == "optical_sar_fusion":
@@ -149,13 +149,13 @@ class AgentController:
             await emit(f"Loading {adapter_id}", f"Binding {model_name} region grounding projector...")
             await asyncio.sleep(0.08)
 
-            await emit("Executing Region Grounding", f"Extracting spatial feature clusters for '{query}'...")
+            await emit("Executing Region Grounding & Segmentation", f"Extracting spatial feature clusters for '{query}'...")
             res = self.grounding_tool.run(
                 rgb_array=image_primary,
                 query=query,
                 metadata=metadata_primary
             )
-            response_text = f"Region Grounding: Identified {res['detected_count']} instance(s) matching '{res['target_label']}'. {res['caption']}"
+            response_text = f"Region Grounding & Segmentation: Identified {res['detected_count']} instance(s) matching '{res['target_label']}'. Rendered as EPSG:4326 GeoJSON vector polygons."
             confidence = res["confidence_score"]
             visual_evidence = res.get("visual_evidence")
             preview_url = None
