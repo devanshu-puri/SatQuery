@@ -6,6 +6,7 @@ import MapComponent from './components/MapComponent';
 import ResultsPanel from './components/ResultsPanel';
 import ModelCardModal from './components/ModelCardModal';
 import SessionHistoryDrawer from './components/SessionHistoryDrawer';
+import EvaluationModal from './components/EvaluationModal';
 import {
     fetchHealth,
     fetchModels,
@@ -19,6 +20,7 @@ function App() {
     const [healthStatus, setHealthStatus] = useState(null);
     const [models, setModels] = useState({});
     const [isModelsOpen, setIsModelsOpen] = useState(false);
+    const [isEvaluationOpen, setIsEvaluationOpen] = useState(false);
     const [sessionHistory, setSessionHistory] = useState([]);
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
@@ -193,6 +195,7 @@ function App() {
             <Header
                 onOpenModels={() => setIsModelsOpen(true)}
                 onOpenHistory={() => setIsHistoryOpen(true)}
+                onOpenEvaluation={() => setIsEvaluationOpen(true)}
                 healthStatus={healthStatus}
             />
 
@@ -200,6 +203,11 @@ function App() {
                 isOpen={isModelsOpen}
                 onClose={() => setIsModelsOpen(false)}
                 models={models}
+            />
+
+            <EvaluationModal
+                isOpen={isEvaluationOpen}
+                onClose={() => setIsEvaluationOpen(false)}
             />
 
             <SessionHistoryDrawer

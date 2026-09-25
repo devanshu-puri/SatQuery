@@ -1,0 +1,918 @@
+{
+  "benchmark": "RSVQA",
+  "split": "official_test_split",
+  "total_examples": 100,
+  "overall_accuracy": 50.0,
+  "category_accuracy": {
+    "presence": 75.0,
+    "comparison": 0.0,
+    "count": 100.0,
+    "rural_urban": 0.0,
+    "land_cover": 100.0
+  },
+  "evaluation_duration_seconds": 2.19,
+  "mean_latency_ms": 21.85,
+  "evaluated_at": "2026-09-25T09:57:32Z",
+  "results": [
+    {
+      "id": "rsvqa_test_0001",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 19.14
+    },
+    {
+      "id": "rsvqa_test_0002",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 21.9
+    },
+    {
+      "id": "rsvqa_test_0003",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 23.27
+    },
+    {
+      "id": "rsvqa_test_0004",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 20.72
+    },
+    {
+      "id": "rsvqa_test_0005",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 20.32
+    },
+    {
+      "id": "rsvqa_test_0006",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 23.89
+    },
+    {
+      "id": "rsvqa_test_0007",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.85
+    },
+    {
+      "id": "rsvqa_test_0008",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 20.68
+    },
+    {
+      "id": "rsvqa_test_0009",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 18.51
+    },
+    {
+      "id": "rsvqa_test_0010",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 20.69
+    },
+    {
+      "id": "rsvqa_test_0011",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 25.65
+    },
+    {
+      "id": "rsvqa_test_0012",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 26.23
+    },
+    {
+      "id": "rsvqa_test_0013",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 21.62
+    },
+    {
+      "id": "rsvqa_test_0014",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 21.39
+    },
+    {
+      "id": "rsvqa_test_0015",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 24.48
+    },
+    {
+      "id": "rsvqa_test_0016",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 26.67
+    },
+    {
+      "id": "rsvqa_test_0017",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 27.32
+    },
+    {
+      "id": "rsvqa_test_0018",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 21.81
+    },
+    {
+      "id": "rsvqa_test_0019",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 21.97
+    },
+    {
+      "id": "rsvqa_test_0020",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 19.22
+    },
+    {
+      "id": "rsvqa_test_0021",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 19.68
+    },
+    {
+      "id": "rsvqa_test_0022",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 21.09
+    },
+    {
+      "id": "rsvqa_test_0023",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 20.93
+    },
+    {
+      "id": "rsvqa_test_0024",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 19.16
+    },
+    {
+      "id": "rsvqa_test_0025",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 19.78
+    },
+    {
+      "id": "rsvqa_test_0026",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 22.35
+    },
+    {
+      "id": "rsvqa_test_0027",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 21.87
+    },
+    {
+      "id": "rsvqa_test_0028",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 19.71
+    },
+    {
+      "id": "rsvqa_test_0029",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 17.95
+    },
+    {
+      "id": "rsvqa_test_0030",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 18.39
+    },
+    {
+      "id": "rsvqa_test_0031",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 18.65
+    },
+    {
+      "id": "rsvqa_test_0032",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 19.12
+    },
+    {
+      "id": "rsvqa_test_0033",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 20.07
+    },
+    {
+      "id": "rsvqa_test_0034",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 20.6
+    },
+    {
+      "id": "rsvqa_test_0035",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 24.21
+    },
+    {
+      "id": "rsvqa_test_0036",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 21.21
+    },
+    {
+      "id": "rsvqa_test_0037",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 21.01
+    },
+    {
+      "id": "rsvqa_test_0038",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 18.79
+    },
+    {
+      "id": "rsvqa_test_0039",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 21.86
+    },
+    {
+      "id": "rsvqa_test_0040",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 20.62
+    },
+    {
+      "id": "rsvqa_test_0041",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 20.35
+    },
+    {
+      "id": "rsvqa_test_0042",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 20.16
+    },
+    {
+      "id": "rsvqa_test_0043",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 19.22
+    },
+    {
+      "id": "rsvqa_test_0044",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 19.29
+    },
+    {
+      "id": "rsvqa_test_0045",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 21.25
+    },
+    {
+      "id": "rsvqa_test_0046",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 20.85
+    },
+    {
+      "id": "rsvqa_test_0047",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 18.73
+    },
+    {
+      "id": "rsvqa_test_0048",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 17.38
+    },
+    {
+      "id": "rsvqa_test_0049",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 18.23
+    },
+    {
+      "id": "rsvqa_test_0050",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 19.64
+    },
+    {
+      "id": "rsvqa_test_0051",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 21.01
+    },
+    {
+      "id": "rsvqa_test_0052",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 20.02
+    },
+    {
+      "id": "rsvqa_test_0053",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 21.72
+    },
+    {
+      "id": "rsvqa_test_0054",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 21.14
+    },
+    {
+      "id": "rsvqa_test_0055",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 19.62
+    },
+    {
+      "id": "rsvqa_test_0056",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 22.03
+    },
+    {
+      "id": "rsvqa_test_0057",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.62
+    },
+    {
+      "id": "rsvqa_test_0058",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 18.84
+    },
+    {
+      "id": "rsvqa_test_0059",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.95
+    },
+    {
+      "id": "rsvqa_test_0060",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 26.62
+    },
+    {
+      "id": "rsvqa_test_0061",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 28.27
+    },
+    {
+      "id": "rsvqa_test_0062",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 33.62
+    },
+    {
+      "id": "rsvqa_test_0063",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 28.85
+    },
+    {
+      "id": "rsvqa_test_0064",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 31.05
+    },
+    {
+      "id": "rsvqa_test_0065",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 23.87
+    },
+    {
+      "id": "rsvqa_test_0066",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 24.56
+    },
+    {
+      "id": "rsvqa_test_0067",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.79
+    },
+    {
+      "id": "rsvqa_test_0068",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 20.87
+    },
+    {
+      "id": "rsvqa_test_0069",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 23.61
+    },
+    {
+      "id": "rsvqa_test_0070",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 24.91
+    },
+    {
+      "id": "rsvqa_test_0071",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 22.91
+    },
+    {
+      "id": "rsvqa_test_0072",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 25.54
+    },
+    {
+      "id": "rsvqa_test_0073",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 26.58
+    },
+    {
+      "id": "rsvqa_test_0074",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 21.97
+    },
+    {
+      "id": "rsvqa_test_0075",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 23.1
+    },
+    {
+      "id": "rsvqa_test_0076",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 24.79
+    },
+    {
+      "id": "rsvqa_test_0077",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.24
+    },
+    {
+      "id": "rsvqa_test_0078",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 21.21
+    },
+    {
+      "id": "rsvqa_test_0079",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 20.85
+    },
+    {
+      "id": "rsvqa_test_0080",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 23.33
+    },
+    {
+      "id": "rsvqa_test_0081",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 23.73
+    },
+    {
+      "id": "rsvqa_test_0082",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 22.67
+    },
+    {
+      "id": "rsvqa_test_0083",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 21.66
+    },
+    {
+      "id": "rsvqa_test_0084",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 24.94
+    },
+    {
+      "id": "rsvqa_test_0085",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 25.05
+    },
+    {
+      "id": "rsvqa_test_0086",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 21.83
+    },
+    {
+      "id": "rsvqa_test_0087",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 25.29
+    },
+    {
+      "id": "rsvqa_test_0088",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 19.13
+    },
+    {
+      "id": "rsvqa_test_0089",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.62
+    },
+    {
+      "id": "rsvqa_test_0090",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 22.93
+    },
+    {
+      "id": "rsvqa_test_0091",
+      "question_type": "presence",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "latency_ms": 23.58
+    },
+    {
+      "id": "rsvqa_test_0092",
+      "question_type": "presence",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "latency_ms": 23.26
+    },
+    {
+      "id": "rsvqa_test_0093",
+      "question_type": "presence",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 22.69
+    },
+    {
+      "id": "rsvqa_test_0094",
+      "question_type": "comparison",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": false,
+      "latency_ms": 21.36
+    },
+    {
+      "id": "rsvqa_test_0095",
+      "question_type": "comparison",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 23.23
+    },
+    {
+      "id": "rsvqa_test_0096",
+      "question_type": "count",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "latency_ms": 21.58
+    },
+    {
+      "id": "rsvqa_test_0097",
+      "question_type": "rural_urban",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 19.3
+    },
+    {
+      "id": "rsvqa_test_0098",
+      "question_type": "land_cover",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land-Cover Classification (Calibrated against ESA WorldCover v200 & Cartosat/Sentinel GSD):\n\u2022 Active Vegetation & Cropland: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Surface Water Bodies: 7.93% (46.3 ha)\n\u2022 Dominant Landscape Class: Built-Up Urban Area.",
+      "is_correct": true,
+      "latency_ms": 17.88
+    },
+    {
+      "id": "rsvqa_test_0099",
+      "question_type": "presence",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "latency_ms": 18.33
+    },
+    {
+      "id": "rsvqa_test_0100",
+      "question_type": "comparison",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "prediction": "Water Body Area Measurement:\n\u2022 Water Body Coverage: 7.93% of scene\n\u2022 Total Water Surface Area: 46.3 Hectares (0.46 km\u00b2)\n\u2022 Hydrographic State: Open surface water reservoir with clear boundary definition.",
+      "is_correct": false,
+      "latency_ms": 19.91
+    }
+  ]
+}

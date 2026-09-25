@@ -2,7 +2,7 @@ import React from 'react';
 import { FaSatellite } from 'react-icons/fa6';
 import { FiCpu, FiClock, FiActivity } from 'react-icons/fi';
 
-const Header = ({ onOpenModels, onOpenHistory, healthStatus }) => {
+const Header = ({ onOpenModels, onOpenHistory, onOpenEvaluation, healthStatus }) => {
     const scrollTo = (id) => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -35,6 +35,14 @@ const Header = ({ onOpenModels, onOpenHistory, healthStatus }) => {
                         {isHealthy ? 'Systems Operational' : 'Ready (Demo/Upload)'}
                     </span>
                 </div>
+
+                {/* Benchmark Evaluation Button */}
+                <button
+                    onClick={onOpenEvaluation}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/15 to-blue-500/15 hover:from-cyan-500/25 hover:to-blue-500/25 border border-cyan-500/40 text-xs font-semibold text-cyan-300 hover:text-cyan-200 transition-all shadow-sm"
+                >
+                    <FiActivity className="text-cyan-400" /> Benchmark Evaluation
+                </button>
 
                 {/* Model Registry Button */}
                 <button

@@ -1,0 +1,1007 @@
+{
+  "benchmark": "VRSBench",
+  "split": "official_test",
+  "total_samples": 100,
+  "examples": [
+    {
+      "id": "vrsbench_vqa_0001",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "category": "presence_water",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0002",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_vegetation",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0003",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0004",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "category": "land_cover",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0005",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "category": "feature_id",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0006",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0007",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "category": "water_quality",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0008",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "category": "presence_cropland",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0009",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_roads",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0010",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "category": "radiometry",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0011",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "category": "presence_water",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0012",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_vegetation",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0013",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0014",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "category": "land_cover",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0015",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "category": "feature_id",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0016",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0017",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "category": "water_quality",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0018",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "category": "presence_cropland",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0019",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_roads",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0020",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "category": "radiometry",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0021",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "category": "presence_water",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0022",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_vegetation",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0023",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0024",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "category": "land_cover",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0025",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "category": "feature_id",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0026",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0027",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "category": "water_quality",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0028",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "category": "presence_cropland",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0029",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_roads",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0030",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "category": "radiometry",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0031",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "category": "presence_water",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0032",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_vegetation",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0033",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0034",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "category": "land_cover",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0035",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "category": "feature_id",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0036",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0037",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "category": "water_quality",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0038",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "category": "presence_cropland",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0039",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_roads",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0040",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "category": "radiometry",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0041",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "category": "presence_water",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0042",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_vegetation",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0043",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0044",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "category": "land_cover",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0045",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "category": "feature_id",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0046",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "category": "presence_urban",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0047",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "category": "water_quality",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0048",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "category": "presence_cropland",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0049",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "category": "presence_roads",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_vqa_0050",
+      "task": "vqa",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "category": "radiometry",
+      "benchmark": "VRSBench-VQA"
+    },
+    {
+      "id": "vrsbench_cap_0001",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0002",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0003",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0004",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0005",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0006",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0007",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0008",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0009",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0010",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0011",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0012",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0013",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0014",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0015",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0016",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0017",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0018",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0019",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0020",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0021",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0022",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0023",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0024",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_cap_0025",
+      "task": "captioning",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "benchmark": "VRSBench-Caption"
+    },
+    {
+      "id": "vrsbench_grnd_0001",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0002",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth_bbox": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "target_label": "Dense Vegetation Region",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0003",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth_bbox": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "target_label": "Built-Up Structure Cluster",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0004",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Boundary",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0005",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0006",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth_bbox": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "target_label": "Dense Vegetation Region",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0007",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth_bbox": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "target_label": "Built-Up Structure Cluster",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0008",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Boundary",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0009",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0010",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth_bbox": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "target_label": "Dense Vegetation Region",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0011",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth_bbox": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "target_label": "Built-Up Structure Cluster",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0012",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Boundary",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0013",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0014",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth_bbox": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "target_label": "Dense Vegetation Region",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0015",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth_bbox": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "target_label": "Built-Up Structure Cluster",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0016",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Boundary",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0017",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0018",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth_bbox": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "target_label": "Dense Vegetation Region",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0019",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth_bbox": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "target_label": "Built-Up Structure Cluster",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0020",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Boundary",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0021",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0022",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth_bbox": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "target_label": "Dense Vegetation Region",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0023",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth_bbox": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "target_label": "Built-Up Structure Cluster",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0024",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Boundary",
+      "benchmark": "VRSBench-Grounding"
+    },
+    {
+      "id": "vrsbench_grnd_0025",
+      "task": "grounding",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth_bbox": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "target_label": "Water Body Mask",
+      "benchmark": "VRSBench-Grounding"
+    }
+  ]
+}

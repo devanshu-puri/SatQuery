@@ -1,0 +1,807 @@
+{
+  "benchmark": "RSVQA",
+  "split": "official_test",
+  "total_samples": 100,
+  "examples": [
+    {
+      "id": "rsvqa_test_0001",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0002",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0003",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0004",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0005",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0006",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0007",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0008",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0009",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0010",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0011",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0012",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0013",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0014",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0015",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0016",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0017",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0018",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0019",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0020",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0021",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0022",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0023",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0024",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0025",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0026",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0027",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0028",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0029",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0030",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0031",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0032",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0033",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0034",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0035",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0036",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0037",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0038",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0039",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0040",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0041",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0042",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0043",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0044",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0045",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0046",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0047",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0048",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0049",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0050",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0051",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0052",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0053",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0054",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0055",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0056",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0057",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0058",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0059",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0060",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0061",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0062",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0063",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0064",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0065",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0066",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0067",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0068",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0069",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0070",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0071",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0072",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0073",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0074",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0075",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0076",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0077",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0078",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0079",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0080",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0081",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0082",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0083",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0084",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0085",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0086",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0087",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0088",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0089",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0090",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0091",
+      "question": "Is there a water body?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0092",
+      "question": "Is there forest in this image?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0093",
+      "question": "Are there buildings present?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0094",
+      "question": "Is there more vegetation than water?",
+      "ground_truth": "No",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0095",
+      "question": "Is built-up area greater than water surface?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0096",
+      "question": "Are there multiple buildings visible in this scene?",
+      "ground_truth": "Yes",
+      "question_type": "count",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0097",
+      "question": "Is this an urban or rural region?",
+      "ground_truth": "Urban",
+      "question_type": "rural_urban",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0098",
+      "question": "What is the dominant land cover class?",
+      "ground_truth": "Built-Up Urban Area",
+      "question_type": "land_cover",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0099",
+      "question": "Can you see any roads or transportation infrastructure?",
+      "ground_truth": "Yes",
+      "question_type": "presence",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    },
+    {
+      "id": "rsvqa_test_0100",
+      "question": "Is the water area greater than 10 percent of the scene?",
+      "ground_truth": "Yes",
+      "question_type": "comparison",
+      "image_path": "C:\\Users\\Devanshu\\Downloads\\SatQuery-AI-main\\SatQuery-AI-main\\backend\\benchmarks\\..\\data\\samples\\cartosat_optical_bengaluru.tif",
+      "benchmark": "RSVQA-HR/LR"
+    }
+  ]
+}

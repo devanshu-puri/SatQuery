@@ -314,6 +314,48 @@ def get_cached_report_pdf(query_id: str):
         headers={"Content-Disposition": f"attachment; filename=satquery_evaluation_{query_id}.pdf"}
     )
 
+# Benchmark Evaluation Endpoints
+EVAL_RESULTS_DIR = os.path.join(os.path.dirname(__file__), "eval_results")
+
+@app.get("/api/eval-results")
+def get_benchmark_eval_results():
+    """Returns official benchmark evaluation summary across VRSBench, RSVQA, and CDVQA."""
+    summary_path = os.path.join(EVAL_RESULTS_DIR, "benchmark_summary.json")
+    if os.path.exists(summary_path):
+        with open(summary_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {
+        "status": "NOT_RUN",
+        "message": "Evaluation results not yet generated. Run /api/eval-results/run to execute harness."
+    }
+
+@app.get("/api/eval-results/{benchmark_name}")
+def get_benchmark_raw_receipt(benchmark_name: str):
+    """Returns full per-example raw JSON receipt for a given benchmark."""
+    valid_names = {
+        "vrsbench": "vrsbench_result.json",
+        "rsvqa": "rsvqa_result.json",
+        "cdvqa": "cdvqa_result.json"
+    }
+    fname = valid_names.get(benchmark_name.lower())
+    if not fname:
+        raise HTTPException(status_code=404, detail=f"Benchmark '{benchmark_name}' not found. Available: {list(valid_names.keys())}")
+    file_path = os.path.join(EVAL_RESULTS_DIR, fname)
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail=f"Receipt file '{fname}' not found.")
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+@app.post("/api/eval-results/run")
+def trigger_benchmark_evaluations():
+    """Runs all 3 official benchmark evaluation harnesses and generates fresh JSON receipts."""
+    try:
+        from benchmarks.run_all_evals import run_all_benchmarks
+        summary = run_all_benchmarks()
+        return {"status": "SUCCESS", "summary": summary}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Benchmark evaluation failed: {str(e)}")
+
 # Legacy compatibility endpoints
 @app.get("/api/states")
 def get_states():

@@ -57,6 +57,22 @@ export const downloadPdfReport = async (queryResult, imageBase64) => {
     return response.data;
 };
 
+// Benchmark Evaluation APIs
+export const fetchEvalResults = async () => {
+    const response = await axios.get(`${API_BASE_URL}/eval-results`);
+    return response.data;
+};
+
+export const fetchBenchmarkReceipt = async (benchmarkName) => {
+    const response = await axios.get(`${API_BASE_URL}/eval-results/${benchmarkName}`);
+    return response.data;
+};
+
+export const runBenchmarkEvaluation = async () => {
+    const response = await axios.post(`${API_BASE_URL}/eval-results/run`);
+    return response.data;
+};
+
 // Legacy compatibility
 export const fetchStates = async () => {
     const response = await axios.get(`${API_BASE_URL}/states`);

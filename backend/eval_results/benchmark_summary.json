@@ -1,0 +1,51 @@
+{
+  "status": "COMPLETED",
+  "total_benchmarks_evaluated": 3,
+  "total_test_cases_evaluated": 300,
+  "total_evaluation_time_seconds": 17.23,
+  "timestamp": "2026-09-25T09:57:45Z",
+  "benchmarks": {
+    "vrsbench": {
+      "name": "VRSBench Official Test Split",
+      "sample_size": 100,
+      "overall_accuracy_pct": 38.0,
+      "vqa_accuracy_pct": 50.0,
+      "captioning_token_f1_pct": 16.01,
+      "grounding_acc_at_50_iou_pct": 52.0,
+      "mean_latency_ms": 18.39,
+      "raw_receipt_file": "vrsbench_result.json"
+    },
+    "rsvqa": {
+      "name": "RSVQA-LR/HR Official Test Split",
+      "sample_size": 100,
+      "overall_accuracy_pct": 50.0,
+      "category_accuracy": {
+        "presence": 75.0,
+        "comparison": 0.0,
+        "count": 100.0,
+        "rural_urban": 0.0,
+        "land_cover": 100.0
+      },
+      "mean_latency_ms": 21.85,
+      "raw_receipt_file": "rsvqa_result.json"
+    },
+    "cdvqa": {
+      "name": "CDVQA Bi-Temporal Change-VQA Official Test Split",
+      "sample_size": 100,
+      "overall_accuracy_pct": 70.0,
+      "category_accuracy": {
+        "change_explanation": 100.0,
+        "change_direction": 100.0,
+        "vegetation_direction": 0.0,
+        "binary_construction": 100.0,
+        "urban_expansion": 100.0,
+        "magnitude_check": 100.0,
+        "cluster_presence": 100.0,
+        "ndvi_delta": 0.0,
+        "water_delta": 0.0
+      },
+      "mean_latency_ms": 130.41,
+      "raw_receipt_file": "cdvqa_result.json"
+    }
+  }
+}

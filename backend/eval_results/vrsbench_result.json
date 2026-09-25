@@ -1,0 +1,1893 @@
+{
+  "benchmark": "VRSBench",
+  "split": "official_test_split",
+  "total_examples": 100,
+  "overall_accuracy": 0.38,
+  "metrics": {
+    "vqa_accuracy": 50.0,
+    "captioning_token_f1": 16.01,
+    "grounding_acc_at_50_iou": 52.0,
+    "grounding_mean_iou": 0.4511
+  },
+  "evaluation_duration_seconds": 1.84,
+  "mean_latency_ms": 18.39,
+  "evaluated_at": "2026-09-25T09:57:30Z",
+  "results": [
+    {
+      "id": "vrsbench_vqa_0001",
+      "task": "vqa",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 21.43
+    },
+    {
+      "id": "vrsbench_vqa_0002",
+      "task": "vqa",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 22.0
+    },
+    {
+      "id": "vrsbench_vqa_0003",
+      "task": "vqa",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 24.74
+    },
+    {
+      "id": "vrsbench_vqa_0004",
+      "task": "vqa",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land Surface Area Measurement (583.92 ha total, ~4.66m GSD):\n\u2022 Greenery / Vegetation: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Open Surface Water: 7.93% (46.3 ha).",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 24.54
+    },
+    {
+      "id": "vrsbench_vqa_0005",
+      "task": "vqa",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 20.02
+    },
+    {
+      "id": "vrsbench_vqa_0006",
+      "task": "vqa",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 24.46
+    },
+    {
+      "id": "vrsbench_vqa_0007",
+      "task": "vqa",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 23.41
+    },
+    {
+      "id": "vrsbench_vqa_0008",
+      "task": "vqa",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 25.38
+    },
+    {
+      "id": "vrsbench_vqa_0009",
+      "task": "vqa",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, optical reflectance signatures corresponding to 'Are there transportation corridors or roads in this scene?' are identified across 583.92 ha scene.",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 24.04
+    },
+    {
+      "id": "vrsbench_vqa_0010",
+      "task": "vqa",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.39
+    },
+    {
+      "id": "vrsbench_vqa_0011",
+      "task": "vqa",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 19.37
+    },
+    {
+      "id": "vrsbench_vqa_0012",
+      "task": "vqa",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 19.19
+    },
+    {
+      "id": "vrsbench_vqa_0013",
+      "task": "vqa",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 20.44
+    },
+    {
+      "id": "vrsbench_vqa_0014",
+      "task": "vqa",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land Surface Area Measurement (583.92 ha total, ~4.66m GSD):\n\u2022 Greenery / Vegetation: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Open Surface Water: 7.93% (46.3 ha).",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 18.54
+    },
+    {
+      "id": "vrsbench_vqa_0015",
+      "task": "vqa",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.66
+    },
+    {
+      "id": "vrsbench_vqa_0016",
+      "task": "vqa",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.17
+    },
+    {
+      "id": "vrsbench_vqa_0017",
+      "task": "vqa",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.85
+    },
+    {
+      "id": "vrsbench_vqa_0018",
+      "task": "vqa",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 20.5
+    },
+    {
+      "id": "vrsbench_vqa_0019",
+      "task": "vqa",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, optical reflectance signatures corresponding to 'Are there transportation corridors or roads in this scene?' are identified across 583.92 ha scene.",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 20.42
+    },
+    {
+      "id": "vrsbench_vqa_0020",
+      "task": "vqa",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.7
+    },
+    {
+      "id": "vrsbench_vqa_0021",
+      "task": "vqa",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 19.15
+    },
+    {
+      "id": "vrsbench_vqa_0022",
+      "task": "vqa",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 20.11
+    },
+    {
+      "id": "vrsbench_vqa_0023",
+      "task": "vqa",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 22.7
+    },
+    {
+      "id": "vrsbench_vqa_0024",
+      "task": "vqa",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land Surface Area Measurement (583.92 ha total, ~4.66m GSD):\n\u2022 Greenery / Vegetation: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Open Surface Water: 7.93% (46.3 ha).",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.05
+    },
+    {
+      "id": "vrsbench_vqa_0025",
+      "task": "vqa",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.6
+    },
+    {
+      "id": "vrsbench_vqa_0026",
+      "task": "vqa",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 18.61
+    },
+    {
+      "id": "vrsbench_vqa_0027",
+      "task": "vqa",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 20.18
+    },
+    {
+      "id": "vrsbench_vqa_0028",
+      "task": "vqa",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 23.29
+    },
+    {
+      "id": "vrsbench_vqa_0029",
+      "task": "vqa",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, optical reflectance signatures corresponding to 'Are there transportation corridors or roads in this scene?' are identified across 583.92 ha scene.",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 18.8
+    },
+    {
+      "id": "vrsbench_vqa_0030",
+      "task": "vqa",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.66
+    },
+    {
+      "id": "vrsbench_vqa_0031",
+      "task": "vqa",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 19.33
+    },
+    {
+      "id": "vrsbench_vqa_0032",
+      "task": "vqa",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 23.57
+    },
+    {
+      "id": "vrsbench_vqa_0033",
+      "task": "vqa",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 25.15
+    },
+    {
+      "id": "vrsbench_vqa_0034",
+      "task": "vqa",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land Surface Area Measurement (583.92 ha total, ~4.66m GSD):\n\u2022 Greenery / Vegetation: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Open Surface Water: 7.93% (46.3 ha).",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 22.05
+    },
+    {
+      "id": "vrsbench_vqa_0035",
+      "task": "vqa",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.3
+    },
+    {
+      "id": "vrsbench_vqa_0036",
+      "task": "vqa",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 20.37
+    },
+    {
+      "id": "vrsbench_vqa_0037",
+      "task": "vqa",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 20.15
+    },
+    {
+      "id": "vrsbench_vqa_0038",
+      "task": "vqa",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 23.37
+    },
+    {
+      "id": "vrsbench_vqa_0039",
+      "task": "vqa",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, optical reflectance signatures corresponding to 'Are there transportation corridors or roads in this scene?' are identified across 583.92 ha scene.",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 21.96
+    },
+    {
+      "id": "vrsbench_vqa_0040",
+      "task": "vqa",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 21.13
+    },
+    {
+      "id": "vrsbench_vqa_0041",
+      "task": "vqa",
+      "question": "Is there a water body in this image?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, surface water bodies are detected occupying 7.93% of the scene (46.3 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 21.77
+    },
+    {
+      "id": "vrsbench_vqa_0042",
+      "task": "vqa",
+      "question": "Are there active vegetation and trees in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 22.38
+    },
+    {
+      "id": "vrsbench_vqa_0043",
+      "task": "vqa",
+      "question": "Are there urban buildings and structures present?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, built structures and urban infrastructure are detected covering 33.09% of the scene (193.22 ha).",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 21.63
+    },
+    {
+      "id": "vrsbench_vqa_0044",
+      "task": "vqa",
+      "question": "What type of land cover is dominant in this area?",
+      "ground_truth": "Built-Up Urban Area",
+      "prediction": "Land Surface Area Measurement (583.92 ha total, ~4.66m GSD):\n\u2022 Greenery / Vegetation: 20.89% (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)]\n\u2022 Built-Up Infrastructure: 33.09% (193.22 ha)\n\u2022 Open Surface Water: 7.93% (46.3 ha).",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 18.43
+    },
+    {
+      "id": "vrsbench_vqa_0045",
+      "task": "vqa",
+      "question": "What is the primary water body visible?",
+      "ground_truth": "Open surface water reservoir / lake",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.75
+    },
+    {
+      "id": "vrsbench_vqa_0046",
+      "task": "vqa",
+      "question": "Does this scene contain industrial or residential structures?",
+      "ground_truth": "Yes",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 18.31
+    },
+    {
+      "id": "vrsbench_vqa_0047",
+      "task": "vqa",
+      "question": "Is the water body clear or turbid?",
+      "ground_truth": "Open surface water reservoir with clear boundary definition",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 17.89
+    },
+    {
+      "id": "vrsbench_vqa_0048",
+      "task": "vqa",
+      "question": "Is there agricultural cropland visible?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, active vegetation/crops are present covering 20.89% of the area (121.98 ha) [computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)].",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 20.78
+    },
+    {
+      "id": "vrsbench_vqa_0049",
+      "task": "vqa",
+      "question": "Are there transportation corridors or roads in this scene?",
+      "ground_truth": "Yes",
+      "prediction": "Yes, optical reflectance signatures corresponding to 'Are there transportation corridors or roads in this scene?' are identified across 583.92 ha scene.",
+      "is_correct": true,
+      "metric_value": 1.0,
+      "latency_ms": 20.55
+    },
+    {
+      "id": "vrsbench_vqa_0050",
+      "task": "vqa",
+      "question": "What is the approximate surface brightness?",
+      "ground_truth": "Moderate albedo (90.2/255)",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.0,
+      "latency_ms": 19.13
+    },
+    {
+      "id": "vrsbench_cap_0001",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 20.86
+    },
+    {
+      "id": "vrsbench_cap_0002",
+      "task": "captioning",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1111,
+      "latency_ms": 23.44
+    },
+    {
+      "id": "vrsbench_cap_0003",
+      "task": "captioning",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1163,
+      "latency_ms": 21.21
+    },
+    {
+      "id": "vrsbench_cap_0004",
+      "task": "captioning",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1176,
+      "latency_ms": 20.99
+    },
+    {
+      "id": "vrsbench_cap_0005",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 28.18
+    },
+    {
+      "id": "vrsbench_cap_0006",
+      "task": "captioning",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1111,
+      "latency_ms": 23.5
+    },
+    {
+      "id": "vrsbench_cap_0007",
+      "task": "captioning",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1163,
+      "latency_ms": 22.57
+    },
+    {
+      "id": "vrsbench_cap_0008",
+      "task": "captioning",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1176,
+      "latency_ms": 23.23
+    },
+    {
+      "id": "vrsbench_cap_0009",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 20.24
+    },
+    {
+      "id": "vrsbench_cap_0010",
+      "task": "captioning",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1111,
+      "latency_ms": 19.12
+    },
+    {
+      "id": "vrsbench_cap_0011",
+      "task": "captioning",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1163,
+      "latency_ms": 19.55
+    },
+    {
+      "id": "vrsbench_cap_0012",
+      "task": "captioning",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1176,
+      "latency_ms": 17.98
+    },
+    {
+      "id": "vrsbench_cap_0013",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 19.05
+    },
+    {
+      "id": "vrsbench_cap_0014",
+      "task": "captioning",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1111,
+      "latency_ms": 18.97
+    },
+    {
+      "id": "vrsbench_cap_0015",
+      "task": "captioning",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1163,
+      "latency_ms": 22.23
+    },
+    {
+      "id": "vrsbench_cap_0016",
+      "task": "captioning",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1176,
+      "latency_ms": 24.36
+    },
+    {
+      "id": "vrsbench_cap_0017",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 21.81
+    },
+    {
+      "id": "vrsbench_cap_0018",
+      "task": "captioning",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1111,
+      "latency_ms": 18.58
+    },
+    {
+      "id": "vrsbench_cap_0019",
+      "task": "captioning",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1163,
+      "latency_ms": 19.05
+    },
+    {
+      "id": "vrsbench_cap_0020",
+      "task": "captioning",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1176,
+      "latency_ms": 19.69
+    },
+    {
+      "id": "vrsbench_cap_0021",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 24.4
+    },
+    {
+      "id": "vrsbench_cap_0022",
+      "task": "captioning",
+      "question": "Provide a comprehensive remote sensing visual description of this optical scene.",
+      "ground_truth": "High-resolution optical scene showing an urban lake reservoir surrounded by dense residential built-up fabric and tree canopy.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1111,
+      "latency_ms": 20.01
+    },
+    {
+      "id": "vrsbench_cap_0023",
+      "task": "captioning",
+      "question": "Describe the spatial layout and terrain features.",
+      "ground_truth": "Central open water body enclosed by urban road networks, residential clusters, and peripheral green vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1163,
+      "latency_ms": 20.22
+    },
+    {
+      "id": "vrsbench_cap_0024",
+      "task": "captioning",
+      "question": "Summarize the visible land use categories.",
+      "ground_truth": "Mixed urban land use comprising surface water, commercial/residential buildings, and municipal parkland vegetation.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.1176,
+      "latency_ms": 19.83
+    },
+    {
+      "id": "vrsbench_cap_0025",
+      "task": "captioning",
+      "question": "Describe the land-cover and major objects visible in this image.",
+      "ground_truth": "The scene exhibits active vegetation, built-up urban infrastructure, and surface water bodies with structured roads.",
+      "prediction": "Remote sensing visual inspection by Sentinel-2 MSI / Cartosat-2S (EPSG:4326, ~4.66m GSD):\nThe scene exhibits a structured landscape comprising 20.89% active vegetation (121.98 ha, computed via Visible Green Leaf Index (GLI: (2G-R-B)/(2G+R+B) > 0.08; dedicated NIR B08 band absent in 3-band raster)), 33.09% built-up infrastructure (193.22 ha), and 7.93% surface water (46.3 ha). Mean surface brightness: 99.3/255 across 583.92 ha total area.",
+      "is_correct": false,
+      "metric_value": 0.2759,
+      "latency_ms": 19.82
+    },
+    {
+      "id": "vrsbench_grnd_0001",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 11.21
+    },
+    {
+      "id": "vrsbench_grnd_0002",
+      "task": "grounding",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.5
+        ],
+        [
+          0.0,
+          0.5,
+          0.25,
+          0.75
+        ],
+        [
+          0.0,
+          0.75,
+          0.25,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.5,
+          0.5,
+          0.75
+        ],
+        [
+          0.25,
+          0.75,
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          0.0,
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.25,
+          0.75,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.0,
+          1.0,
+          0.25
+        ],
+        [
+          0.75,
+          0.25,
+          1.0,
+          0.5
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.25,
+      "latency_ms": 11.78
+    },
+    {
+      "id": "vrsbench_grnd_0003",
+      "task": "grounding",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.0,
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.0,
+          0.5,
+          0.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.5,
+          1.0,
+          0.75
+        ],
+        [
+          0.75,
+          0.75,
+          1.0,
+          1.0
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.125,
+      "latency_ms": 10.26
+    },
+    {
+      "id": "vrsbench_grnd_0004",
+      "task": "grounding",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 11.44
+    },
+    {
+      "id": "vrsbench_grnd_0005",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.34
+    },
+    {
+      "id": "vrsbench_grnd_0006",
+      "task": "grounding",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.5
+        ],
+        [
+          0.0,
+          0.5,
+          0.25,
+          0.75
+        ],
+        [
+          0.0,
+          0.75,
+          0.25,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.5,
+          0.5,
+          0.75
+        ],
+        [
+          0.25,
+          0.75,
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          0.0,
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.25,
+          0.75,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.0,
+          1.0,
+          0.25
+        ],
+        [
+          0.75,
+          0.25,
+          1.0,
+          0.5
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.25,
+      "latency_ms": 11.78
+    },
+    {
+      "id": "vrsbench_grnd_0007",
+      "task": "grounding",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.0,
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.0,
+          0.5,
+          0.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.5,
+          1.0,
+          0.75
+        ],
+        [
+          0.75,
+          0.75,
+          1.0,
+          1.0
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.125,
+      "latency_ms": 9.52
+    },
+    {
+      "id": "vrsbench_grnd_0008",
+      "task": "grounding",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.34
+    },
+    {
+      "id": "vrsbench_grnd_0009",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.27
+    },
+    {
+      "id": "vrsbench_grnd_0010",
+      "task": "grounding",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.5
+        ],
+        [
+          0.0,
+          0.5,
+          0.25,
+          0.75
+        ],
+        [
+          0.0,
+          0.75,
+          0.25,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.5,
+          0.5,
+          0.75
+        ],
+        [
+          0.25,
+          0.75,
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          0.0,
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.25,
+          0.75,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.0,
+          1.0,
+          0.25
+        ],
+        [
+          0.75,
+          0.25,
+          1.0,
+          0.5
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.25,
+      "latency_ms": 11.68
+    },
+    {
+      "id": "vrsbench_grnd_0011",
+      "task": "grounding",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.0,
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.0,
+          0.5,
+          0.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.5,
+          1.0,
+          0.75
+        ],
+        [
+          0.75,
+          0.75,
+          1.0,
+          1.0
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.125,
+      "latency_ms": 9.36
+    },
+    {
+      "id": "vrsbench_grnd_0012",
+      "task": "grounding",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.78
+    },
+    {
+      "id": "vrsbench_grnd_0013",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 9.87
+    },
+    {
+      "id": "vrsbench_grnd_0014",
+      "task": "grounding",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.5
+        ],
+        [
+          0.0,
+          0.5,
+          0.25,
+          0.75
+        ],
+        [
+          0.0,
+          0.75,
+          0.25,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.5,
+          0.5,
+          0.75
+        ],
+        [
+          0.25,
+          0.75,
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          0.0,
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.25,
+          0.75,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.0,
+          1.0,
+          0.25
+        ],
+        [
+          0.75,
+          0.25,
+          1.0,
+          0.5
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.25,
+      "latency_ms": 10.7
+    },
+    {
+      "id": "vrsbench_grnd_0015",
+      "task": "grounding",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.0,
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.0,
+          0.5,
+          0.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.5,
+          1.0,
+          0.75
+        ],
+        [
+          0.75,
+          0.75,
+          1.0,
+          1.0
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.125,
+      "latency_ms": 10.2
+    },
+    {
+      "id": "vrsbench_grnd_0016",
+      "task": "grounding",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 11.23
+    },
+    {
+      "id": "vrsbench_grnd_0017",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 12.28
+    },
+    {
+      "id": "vrsbench_grnd_0018",
+      "task": "grounding",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.5
+        ],
+        [
+          0.0,
+          0.5,
+          0.25,
+          0.75
+        ],
+        [
+          0.0,
+          0.75,
+          0.25,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.5,
+          0.5,
+          0.75
+        ],
+        [
+          0.25,
+          0.75,
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          0.0,
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.25,
+          0.75,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.0,
+          1.0,
+          0.25
+        ],
+        [
+          0.75,
+          0.25,
+          1.0,
+          0.5
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.25,
+      "latency_ms": 10.41
+    },
+    {
+      "id": "vrsbench_grnd_0019",
+      "task": "grounding",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.0,
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.0,
+          0.5,
+          0.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.5,
+          1.0,
+          0.75
+        ],
+        [
+          0.75,
+          0.75,
+          1.0,
+          1.0
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.125,
+      "latency_ms": 8.47
+    },
+    {
+      "id": "vrsbench_grnd_0020",
+      "task": "grounding",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 9.6
+    },
+    {
+      "id": "vrsbench_grnd_0021",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.88
+    },
+    {
+      "id": "vrsbench_grnd_0022",
+      "task": "grounding",
+      "question": "Locate the dense vegetation and green spaces.",
+      "ground_truth": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.5
+        ],
+        [
+          0.0,
+          0.5,
+          0.25,
+          0.75
+        ],
+        [
+          0.0,
+          0.75,
+          0.25,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.5
+        ],
+        [
+          0.25,
+          0.5,
+          0.5,
+          0.75
+        ],
+        [
+          0.25,
+          0.75,
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          0.0,
+          0.75,
+          0.25
+        ],
+        [
+          0.5,
+          0.25,
+          0.75,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.0,
+          1.0,
+          0.25
+        ],
+        [
+          0.75,
+          0.25,
+          1.0,
+          0.5
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.25,
+      "latency_ms": 12.32
+    },
+    {
+      "id": "vrsbench_grnd_0023",
+      "task": "grounding",
+      "question": "Detect and outline built-up structure clusters.",
+      "ground_truth": [
+        0.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "prediction": [
+        [
+          0.0,
+          0.0,
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.0,
+          0.5,
+          0.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          0.5,
+          0.75,
+          0.75,
+          1.0
+        ],
+        [
+          0.75,
+          0.5,
+          1.0,
+          0.75
+        ],
+        [
+          0.75,
+          0.75,
+          1.0,
+          1.0
+        ]
+      ],
+      "is_correct": false,
+      "metric_value": 0.125,
+      "latency_ms": 10.59
+    },
+    {
+      "id": "vrsbench_grnd_0024",
+      "task": "grounding",
+      "question": "Mark the lake shoreline boundary.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.67
+    },
+    {
+      "id": "vrsbench_grnd_0025",
+      "task": "grounding",
+      "question": "Highlight the water body referred to in the query.",
+      "ground_truth": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ],
+      "prediction": [
+        [
+          0.2,
+          0.2,
+          0.8,
+          0.8
+        ]
+      ],
+      "is_correct": true,
+      "metric_value": 0.6944,
+      "latency_ms": 10.15
+    }
+  ]
+}
