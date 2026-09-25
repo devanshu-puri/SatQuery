@@ -12,6 +12,11 @@ export const fetchModels = async () => {
     return response.data;
 };
 
+export const fetchModelIntegrity = async () => {
+    const response = await axios.get(`${API_BASE_URL}/model-integrity`);
+    return response.data;
+};
+
 export const fetchDemoSamples = async () => {
     const response = await axios.get(`${API_BASE_URL}/demo/samples`);
     return response.data;

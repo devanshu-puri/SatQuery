@@ -87,6 +87,7 @@ def generate_evaluation_pdf(
 
     # Summary Grid (Query, Task, Confidence)
     trace = query_result.get("execution_trace", {})
+    sar_sensor_label = query_result.get("sar_sensor") or trace.get("sar_sensor") or "Sentinel-1 C-band SAR — RISAT-class proxy pending Bhoonidhi access"
     summary_data = [
         [
             Paragraph("<b>User Query:</b>", body_style),
@@ -103,6 +104,10 @@ def generate_evaluation_pdf(
         [
             Paragraph("<b>Model Invoked:</b>", body_style),
             Paragraph(f"{trace.get('model_invoked', 'GeoChat-7B (BigEarthNet-LoRA)')}", body_style)
+        ],
+        [
+            Paragraph("<b>SAR Provenance:</b>", body_style),
+            Paragraph(sar_sensor_label, body_style)
         ]
     ]
 

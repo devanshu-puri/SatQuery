@@ -13,6 +13,7 @@ from geospatial.raster_parser import generate_preview_base64
 class SingleImageVQATool:
     name = "SingleImageVQATool"
     description = "Executes Visual Question Answering on single optical/multispectral satellite scenes."
+    tool_category = "ai_specialist_model"
 
     def __init__(self):
         self.vlm = GeoChatVLM(model_id="geochat_7b")

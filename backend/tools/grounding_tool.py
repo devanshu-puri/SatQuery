@@ -14,6 +14,7 @@ from geospatial.raster_parser import generate_preview_base64
 class RegionGroundingTool:
     name = "RegionGroundingTool"
     description = "Grounds natural language objects in remote sensing imagery to GeoJSON bounding polygons."
+    tool_category = "ai_specialist_model"
 
     def __init__(self):
         self.vlm = GeoChatVLM(model_id="geochat_7b")

@@ -6,6 +6,7 @@ measures real latency via perf_counter, and generates the auditable execution tr
 Supports async execution and live streaming event callbacks.
 """
 
+import os
 import time
 import asyncio
 from typing import Dict, Any, List, Optional, Callable
@@ -26,6 +27,56 @@ class AgentController:
         self.grounding_tool = RegionGroundingTool()
         self.change_tool = BiTemporalChangeDetectionTool()
         self.fusion_tool = OpticalSARFusionTool()
+
+    def _classical_rs_fallback(self, task_type: str, query: str, image_primary: np.ndarray, metadata_primary: Optional[Dict[str, Any]], error: Exception) -> Dict[str, Any]:
+        """Returns an explicit classical baseline when specialist inference is unavailable."""
+        arr = np.asarray(image_primary)
+        if arr.ndim == 2:
+            arr = np.repeat(arr[:, :, None], 3, axis=2)
+        if arr.shape[-1] < 3:
+            arr = np.repeat(arr[:, :, :1], 3, axis=2)
+        arr = arr[:, :, :3].astype(float)
+        r = arr[:, :, 0]
+        g = arr[:, :, 1]
+        b = arr[:, :, 2]
+        gray = (r + g + b) / 3.0
+        veg_idx = (2.0 * g - r - b) / (2.0 * g + r + b + 1e-6)
+        veg_pct = round(float(np.mean(veg_idx > 0.08)) * 100.0, 2)
+        water_pct = round(float(np.mean((b - r > 6) & (g - r > 2) & (gray < 115))) * 100.0, 2)
+        built_pct = round(float(np.mean((gray > 110) & (gray < 220))) * 100.0, 2)
+        summary = (
+            f"Classical RS baseline: vegetation={veg_pct}% | water={water_pct}% | built-up={built_pct}%"
+        )
+        return {
+            "query": query,
+            "task_type": task_type,
+            "status": "PARTIAL",
+            "response": f"⚠️ [Specialist model unavailable: {error}] {summary}",
+            "confidence_score": 0.46,
+            "visual_evidence": None,
+            "preview_url": None,
+            "bitemporal_previews": None,
+            "intent_tool_mismatch": False,
+            "mismatch_warning": None,
+            "extra_stats": {
+                "category": "Classical RS baseline",
+                "vegetation_pct": veg_pct,
+                "water_pct": water_pct,
+                "built_up_pct": built_pct,
+            },
+            "tool_category": "classical_rs",
+            "model_category": "classical_rs",
+            "execution_trace": {
+                "task_selected": task_type,
+                "status": "PARTIAL",
+                "reason": f"Specialist model unavailable: {error}",
+                "fallback": "Classical RS baseline",
+                "model_invoked": "specialist_unavailable",
+                "tool_category": "classical_rs",
+                "model_category": "classical_rs",
+                "tools_executed": ["ClassicalRSBaseline"]
+            }
+        }
 
     async def route_and_execute_stream(
         self,
@@ -173,6 +224,7 @@ class AgentController:
             model_name = model_meta["name"]
             adapter_id = model_meta["adapter_id"]
             tool_name = "OpticalSARFusionTool"
+            tool_category = "classical_rs"
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} cross-attention weights...")
             await asyncio.sleep(0.08)
@@ -180,13 +232,19 @@ class AgentController:
             sar_input = image_secondary if image_secondary is not None else (np.mean(image_primary, axis=-1) * 0.8)
             await emit("Executing Cross-Modal Fusion", "Jointly computing optical reflectance & SAR backscatter...")
 
-            res = self.fusion_tool.run(
-                rgb_optical=image_primary,
-                sar_array=sar_input,
-                query=query,
-                metadata_opt=metadata_primary,
-                metadata_sar=metadata_secondary
-            )
+            try:
+                res = self.fusion_tool.run(
+                    rgb_optical=image_primary,
+                    sar_array=sar_input,
+                    query=query,
+                    metadata_opt=metadata_primary,
+                    metadata_sar=metadata_secondary
+                )
+            except Exception as exc:
+                fallback = self._classical_rs_fallback(task_type, query, image_primary, metadata_primary, exc)
+                fallback["query"] = query
+                fallback["task_type"] = task_type
+                return fallback
             response_text = mismatch_warning + res["explanation"]
             confidence = res["confidence_score"]
             visual_evidence = res.get("visual_evidence")
@@ -203,6 +261,7 @@ class AgentController:
             model_name = model_meta["name"]
             adapter_id = model_meta["adapter_id"]
             tool_name = "BiTemporalChangeDetectionTool"
+            tool_category = "classical_rs"
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} Siamese weights...")
             await asyncio.sleep(0.08)
@@ -210,13 +269,19 @@ class AgentController:
             t2_input = image_secondary if image_secondary is not None else np.fliplr(image_primary)
             await emit("Executing Bi-Temporal Change Detection", "Calculating radiometric difference vectors (T1 vs T2)...")
 
-            res = self.change_tool.run(
-                rgb_t1=image_primary,
-                rgb_t2=t2_input,
-                query=query,
-                metadata_t1=metadata_primary,
-                metadata_t2=metadata_secondary
-            )
+            try:
+                res = self.change_tool.run(
+                    rgb_t1=image_primary,
+                    rgb_t2=t2_input,
+                    query=query,
+                    metadata_t1=metadata_primary,
+                    metadata_t2=metadata_secondary
+                )
+            except Exception as exc:
+                fallback = self._classical_rs_fallback(task_type, query, image_primary, metadata_primary, exc)
+                fallback["query"] = query
+                fallback["task_type"] = task_type
+                return fallback
             response_text = mismatch_warning + res["explanation"]
             confidence = res["confidence_score"]
             visual_evidence = res.get("visual_evidence")
@@ -249,16 +314,23 @@ class AgentController:
             model_name = model_meta["name"]
             adapter_id = model_meta["adapter_id"]
             tool_name = "RegionGroundingTool"
+            tool_category = "ai_specialist_model"
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} region grounding projector...")
             await asyncio.sleep(0.08)
 
             await emit("Executing Region Grounding & Segmentation", f"Extracting spatial feature clusters for '{query}'...")
-            res = self.grounding_tool.run(
-                rgb_array=image_primary,
-                query=query,
-                metadata=metadata_primary
-            )
+            try:
+                res = self.grounding_tool.run(
+                    rgb_array=image_primary,
+                    query=query,
+                    metadata=metadata_primary
+                )
+            except Exception as exc:
+                fallback = self._classical_rs_fallback(task_type, query, image_primary, metadata_primary, exc)
+                fallback["query"] = query
+                fallback["task_type"] = task_type
+                return fallback
             response_text = mismatch_warning + f"Region Grounding & Segmentation: Identified {res['detected_count']} instance(s) matching '{res['target_label']}'. Rendered as EPSG:4326 GeoJSON vector polygons."
             confidence = res["confidence_score"]
             visual_evidence = res.get("visual_evidence")
@@ -275,16 +347,23 @@ class AgentController:
             model_name = model_meta["name"]
             adapter_id = model_meta["adapter_id"]
             tool_name = "SingleImageVQATool"
+            tool_category = "ai_specialist_model"
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} RS-VQA weights...")
             await asyncio.sleep(0.08)
 
             await emit("Executing RS-VQA Inference", "Performing multi-spectral feature question answering...")
-            res = self.vqa_tool.run(
-                rgb_array=image_primary,
-                query=query,
-                metadata=metadata_primary
-            )
+            try:
+                res = self.vqa_tool.run(
+                    rgb_array=image_primary,
+                    query=query,
+                    metadata=metadata_primary
+                )
+            except Exception as exc:
+                fallback = self._classical_rs_fallback(task_type, query, image_primary, metadata_primary, exc)
+                fallback["query"] = query
+                fallback["task_type"] = task_type
+                return fallback
             response_text = mismatch_warning + res["answer"]
             confidence = res["confidence_score"]
             visual_evidence = None
@@ -301,13 +380,18 @@ class AgentController:
         await emit("Synthesizing Auditable Execution Trace", f"Confidence estimated at {int(confidence * 100)}% | Task: {task_type}")
         real_latency_ms = round((time.perf_counter() - start_perf) * 1000, 2)
 
+        adapter_folder = model_meta.get("adapter_path", "").split("/")[-1] if model_meta else ""
+        adapter_runtime = ModelRegistry.get_adapter_runtime_summary(adapter_folder) if adapter_folder else {"adapter_name": adapter_id, "adapter_sha256": None}
         execution_trace = {
             "task_selected": task_type,
             "router_decision": rationale,
             "intent_tool_mismatch": intent_tool_mismatch,
             "mismatch_details": mismatch_details,
             "model_invoked": model_name,
-            "adapter_used": adapter_id,
+            "model_category": model_meta.get("model_category", "ai_specialist_model"),
+            "tool_category": tool_category,
+            "adapter_used": adapter_runtime.get("adapter_name") or adapter_id,
+            "adapter_sha256": adapter_runtime.get("adapter_sha256"),
             "tools_executed": [tool_name],
             "input_metadata": {
                 "primary_crs": metadata_primary.get("crs", "EPSG:4326") if metadata_primary else "EPSG:4326",
@@ -326,6 +410,7 @@ class AgentController:
         result = {
             "query": query,
             "task_type": task_type,
+            "status": "SUCCESS",
             "response": response_text,
             "confidence_score": round(confidence, 3),
             "visual_evidence": visual_evidence,
@@ -334,6 +419,8 @@ class AgentController:
             "intent_tool_mismatch": intent_tool_mismatch,
             "mismatch_warning": mismatch_warning.strip() if mismatch_warning else None,
             "extra_stats": extra_stats,
+            "tool_category": tool_category,
+            "model_category": model_meta.get("model_category", "ai_specialist_model"),
             "execution_trace": execution_trace
         }
 

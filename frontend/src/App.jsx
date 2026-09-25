@@ -10,6 +10,7 @@ import EvaluationModal from './components/EvaluationModal';
 import {
     fetchHealth,
     fetchModels,
+    fetchModelIntegrity,
     fetchDemoSamples,
     fetchSessionHistory,
     executeQuery,
@@ -19,7 +20,18 @@ import {
 function App() {
     const [healthStatus, setHealthStatus] = useState(null);
     const [models, setModels] = useState({});
+    const [modelIntegrity, setModelIntegrity] = useState({});
     const [isModelsOpen, setIsModelsOpen] = useState(false);
+
+    const loadModelIntegrity = async () => {
+        try {
+            const data = await fetchModelIntegrity();
+            setModelIntegrity(data || {});
+        } catch (error) {
+            console.error('Failed to load model integrity:', error);
+            setModelIntegrity({});
+        }
+    };
     const [isEvaluationOpen, setIsEvaluationOpen] = useState(false);
     const [sessionHistory, setSessionHistory] = useState([]);
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -54,6 +66,7 @@ function App() {
     useEffect(() => {
         fetchHealth().then(setHealthStatus).catch(() => {});
         fetchModels().then(setModels).catch(() => {});
+        loadModelIntegrity();
         fetchDemoSamples().then(res => {
             setDemoSamples(res.samples || []);
             if (res.samples && res.samples.length > 0) {
@@ -203,6 +216,8 @@ function App() {
                 isOpen={isModelsOpen}
                 onClose={() => setIsModelsOpen(false)}
                 models={models}
+                integrity={modelIntegrity}
+                onRefreshIntegrity={loadModelIntegrity}
             />
 
             <EvaluationModal

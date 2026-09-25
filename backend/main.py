@@ -37,6 +37,47 @@ agent_controller = AgentController()
 # Session Query History & Report Store
 SESSION_HISTORY: Dict[str, List[Dict[str, Any]]] = {}
 QUERY_REPORT_CACHE: Dict[str, Dict[str, Any]] = {}
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def load_json_if_exists(path: str) -> Optional[Dict[str, Any]]:
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def _file_age_days(path: str) -> float:
+    if not path or not os.path.exists(path):
+        return float("inf")
+    try:
+        timestamp = os.path.getmtime(path)
+        age_days = (datetime.utcnow() - datetime.fromtimestamp(timestamp)).total_seconds() / 86400.0
+        return max(0.0, age_days)
+    except Exception:
+        return float("inf")
+
+
+def _eval_status(path: str, label: str) -> Dict[str, Any]:
+    exists = os.path.exists(path)
+    age_days = _file_age_days(path)
+    fresh = exists and age_days < 30.0
+    payload = {
+        "status": "PASS" if fresh else "PARTIAL",
+        "path": path,
+        "exists": exists,
+        "freshness_days": age_days if exists else float("inf"),
+        "result": load_json_if_exists(path),
+        "label": label,
+        "note": f"{label} result file is fresh (<30 days)" if fresh else f"{label} result file is missing or older than 30 days",
+    }
+    if exists:
+        payload["evaluated_at"] = load_json_if_exists(path).get("evaluated_at") if isinstance(load_json_if_exists(path), dict) else None
+    return payload
+
 
 # Check GEE status on startup
 GEE_STATUS = {"authenticated": False, "message": "Initializing..."}
@@ -50,6 +91,33 @@ async def startup_event():
     except Exception as e:
         GEE_STATUS = {"authenticated": False, "message": f"GEE Auth Fallback (Demo & Upload Modes Active): {e}"}
         print(GEE_STATUS["message"])
+
+    try:
+        adapter_proof = ModelRegistry.verify_adapter_probe()
+        app.state.adapter_proof = adapter_proof
+        print(f"[ADAPTER_PROOF] {adapter_proof['adapter_name']} SHA256={adapter_proof['adapter_sha256']} logit_diff={max(abs(a-b) for a, b in zip(adapter_proof['base_logits'], adapter_proof['adapter_logits'])):.6f}")
+    except Exception as exc:
+        app.state.adapter_proof = {"probe_passed": False, "error": str(exc)}
+        print(f"[ADAPTER_PROOF] FAILED: {exc}")
+
+    try:
+        from models.geochat_wrapper import GeoChatVLM
+        probe_model = GeoChatVLM(model_id="geochat_7b")
+        probe_input = np.zeros((64, 64, 3), dtype=np.uint8)
+        probe_input[16:48, 16:48, :] = 255
+        probe_result = probe_model.generate(probe_input, "Does this scene contain water?")
+        passed = bool(probe_result.get("model_forward_pass") and probe_result["model_forward_pass"].get("logits"))
+        app.state.geochat_probe = {
+            "passed": passed,
+            "status": "PASS" if passed else "PARTIAL",
+            "model_id": "geochat_7b",
+            "predicted_class": probe_result.get("model_forward_pass", {}).get("predicted_class"),
+            "prompt": probe_result.get("prompt_sent_to_model"),
+            "note": "Geospatial model loaded and responded to probe input" if passed else "Probe failed at model load or inference time",
+        }
+    except Exception as exc:
+        app.state.geochat_probe = {"passed": False, "status": "PARTIAL", "error": str(exc), "note": "GeoChat checkpoint unavailable or failed probe"}
+        print(f"[GEOCHAT_PROBE] FAILED: {exc}")
 
 # Request / Response Schemas
 class GEEFetchRequest(BaseModel):
@@ -96,6 +164,123 @@ def health_check():
 def get_models():
     """Returns the Model Registry catalog with provenance and capabilities."""
     return ModelRegistry.list_models()
+
+
+@app.get("/api/model-integrity")
+def model_integrity():
+    """Returns a live runtime integrity check computed from the actual filesystem and model probes."""
+    bigearthnet_adapter = os.path.join(BASE_DIR, "models", "adapters", "bigearthnet_lora", "adapter_model.bin")
+    bigearthnet_manifest = os.path.join(BASE_DIR, "models", "adapters", "bigearthnet_lora", "training_manifest.json")
+    bigearthnet_loss = os.path.join(BASE_DIR, "models", "adapters", "bigearthnet_lora", "training_loss.png")
+    vrsbench_result = os.path.join(BASE_DIR, "eval_results", "vrsbench_result.json")
+    rsvqa_result = os.path.join(BASE_DIR, "eval_results", "rsvqa_result.json")
+    cdvqa_result = os.path.join(BASE_DIR, "eval_results", "cdvqa_result.json")
+    real_risat_file = os.path.join(BASE_DIR, "data", "samples", "eos04_sar_mrs_bengaluru.tif")
+    adapter_runtime = ModelRegistry.get_adapter_runtime_summary("bigearthnet_lora")
+    real_risat_exists = os.path.exists(real_risat_file)
+    adapter_manifest = load_json_if_exists(bigearthnet_manifest)
+    adapter_probe = getattr(app.state, "adapter_proof", {})
+    rs_adaptation_pass = bool(
+        os.path.exists(bigearthnet_adapter)
+        and os.path.exists(bigearthnet_manifest)
+        and adapter_manifest is not None
+        and bool(adapter_probe.get("probe_passed"))
+    )
+
+    rs_adaptation = {
+        "status": "PASS" if rs_adaptation_pass else "PARTIAL",
+        "adapter_name": adapter_runtime.get("adapter_name"),
+        "adapter_sha256": adapter_runtime.get("adapter_sha256"),
+        "manifest": adapter_manifest,
+        "training_loss_png": os.path.exists(bigearthnet_loss),
+        "training_loss_file": os.path.basename(bigearthnet_loss) if os.path.exists(bigearthnet_loss) else None,
+        "adapter_file": bigearthnet_adapter,
+        "adapter_proof": adapter_probe,
+        "note": "Adapter file + manifest + self-test are present and valid" if rs_adaptation_pass else "Adapter file, manifest, or self-test failed or is missing",
+    }
+
+    vrsbench_check = _eval_status(vrsbench_result, "VRSBench")
+    rsvqa_check = _eval_status(rsvqa_result, "RSVQA")
+    cdvqa_check = _eval_status(cdvqa_result, "CDVQA")
+
+    risat_data = {
+        "status": "PASS" if real_risat_exists else "PARTIAL",
+        "real_risat_file": real_risat_file,
+        "real_risat_exists": real_risat_exists,
+        "note": "EOS-04 / RISAT-1A heritage SAR (18m NRB MRS)" if real_risat_exists else "Sentinel-1 C-band SAR — RISAT-class proxy pending Bhoonidhi access",
+    }
+
+    geochat_probe = getattr(app.state, "geochat_probe", {"passed": False, "status": "PARTIAL"})
+    geochat_checkpoint = {
+        "status": geochat_probe.get("status", "PARTIAL"),
+        "passed": bool(geochat_probe.get("passed")),
+        "model_id": geochat_probe.get("model_id", "geochat_7b"),
+        "predicted_class": geochat_probe.get("predicted_class"),
+        "note": geochat_probe.get("note", "GeoChat checkpoint unavailable or failed probe"),
+        "probe": geochat_probe,
+    }
+
+    try:
+        from tools.change_detection_tool import BiTemporalChangeDetectionTool
+        tool = BiTemporalChangeDetectionTool()
+        t1a = np.zeros((32, 32, 3), dtype=np.uint8)
+        t2a = np.zeros((32, 32, 3), dtype=np.uint8)
+        t1a[8:24, 8:24, :] = 80
+        t2a[8:24, 8:24, :] = 200
+        t1b = np.zeros((32, 32, 3), dtype=np.uint8)
+        t2b = t1b.copy()
+        res_a = tool.run(t1a, t2a, "What changed between these dates?")
+        res_b = tool.run(t1b, t2b, "What changed between these dates?")
+        delta = abs(float(res_a.get("change_percentage", 0.0)) - float(res_b.get("change_percentage", 0.0)))
+        change_pass = delta > 0.0
+        change_model = {
+            "status": "PASS" if change_pass else "PARTIAL",
+            "note": "Change model loads and produces different outputs for distinct T1/T2 pairs" if change_pass else "Change model output is identical across distinct T1/T2 pairs",
+            "output_delta": delta,
+            "probe_pair_a": res_a.get("change_percentage"),
+            "probe_pair_b": res_b.get("change_percentage"),
+        }
+    except Exception as exc:
+        change_model = {"status": "PARTIAL", "note": f"Change model probe failed: {exc}", "output_delta": 0.0}
+
+    try:
+        from tools.optical_sar_fusion_tool import OpticalSARFusionTool
+        fusion_tool = OpticalSARFusionTool()
+        optical_a = np.zeros((32, 32, 3), dtype=np.uint8)
+        sar_a = np.zeros((32, 32), dtype=np.float32)
+        optical_b = np.full((32, 32, 3), 255, dtype=np.uint8)
+        sar_b = np.full((32, 32), 200.0, dtype=np.float32)
+        optical_a[8:24, 8:24, :] = 180
+        sar_a[8:24, 8:24] = 80
+        res_a = fusion_tool.run(optical_a, sar_a, "Identify flooded water bodies.")
+        res_b = fusion_tool.run(optical_b, sar_b, "Identify flooded water bodies.")
+        delta = abs(float(res_a.get("sar_water_coverage_pct", 0.0)) - float(res_b.get("sar_water_coverage_pct", 0.0)))
+        fusion_pass = delta > 0.0
+        fusion_model = {
+            "status": "PASS" if fusion_pass else "PARTIAL",
+            "note": "Fusion model loads and outputs distinct results for different optical/SAR pairs" if fusion_pass else "Fusion model output is identical across distinct optical/SAR pairs",
+            "output_delta": delta,
+            "probe_pair_a": res_a.get("sar_water_coverage_pct"),
+            "probe_pair_b": res_b.get("sar_water_coverage_pct"),
+        }
+    except Exception as exc:
+        fusion_model = {"status": "PARTIAL", "note": f"Fusion model probe failed: {exc}", "output_delta": 0.0}
+
+    status = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "rs_adaptation": rs_adaptation,
+        "bigearthnet_adapter": rs_adaptation,
+        "vrsbench_eval": vrsbench_check,
+        "rsvqa_eval": rsvqa_check,
+        "cdvqa_eval": cdvqa_check,
+        "risat_data": risat_data,
+        "risat_sar": risat_data,
+        "geochat_checkpoint": geochat_checkpoint,
+        "change_model": change_model,
+        "fusion_model": fusion_model,
+    }
+    return status
+
 
 @app.get("/api/demo/samples")
 def get_demo_samples():

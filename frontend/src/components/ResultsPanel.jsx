@@ -112,6 +112,12 @@ const ResultsPanel = ({
                     <span className="text-gray-400">Model Invoked:</span>
                     <span className="font-medium text-gray-200">{trace.model_invoked || 'GeoChat-7B'}</span>
                 </div>
+                <div className="flex justify-between items-center gap-2">
+                    <span className="text-gray-400">Tool Category:</span>
+                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide ${trace.tool_category === 'classical_rs' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'}`}>
+                        {trace.tool_category || 'ai_specialist_model'}
+                    </span>
+                </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Adapter:</span>
                     <span className="font-mono text-[10px] text-accent-cyan">{trace.adapter_used || 'adapter_a'}</span>

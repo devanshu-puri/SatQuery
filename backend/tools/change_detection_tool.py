@@ -19,6 +19,7 @@ from models.geochat_wrapper import compute_dynamic_confidence
 class BiTemporalChangeDetectionTool:
     name = "BiTemporalChangeDetectionTool"
     description = "Jointly compares two co-registered satellite scenes (T1 vs T2) to detect and explain land cover changes."
+    tool_category = "classical_rs"
 
     def run(
         self,
