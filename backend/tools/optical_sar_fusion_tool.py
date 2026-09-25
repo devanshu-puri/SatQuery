@@ -117,11 +117,27 @@ class OpticalSARFusionTool:
 
         geojson_fc = build_geojson_feature_collection(features)
 
+        # Determine SAR sensor provenance accurately
+        sar_filename = metadata_sar.get("filename", "").lower() if metadata_sar else ""
+        sar_type = metadata_sar.get("satellite_type", "") if metadata_sar else ""
+        if "eos" in sar_filename or "risat" in sar_filename or "eos" in sar_type.lower() or "risat" in sar_type.lower():
+            sar_sensor_label = "ISRO EOS-04 / RISAT-1A-Heritage C-Band SAR (18m NRB MRS, 5.35 GHz)"
+            sensor_source_flag = "EOS-04_RISAT1A"
+        elif "sentinel" in sar_filename or "sentinel" in sar_type.lower():
+            sar_sensor_label = "Sentinel-1 C-Band SAR (10m IW GRD Dual-Pol)"
+            sensor_source_flag = "SENTINEL1_SAR"
+        else:
+            sar_sensor_label = "C-Band Synthetic Aperture Radar (SAR Dual-Pol VV/VH)"
+            sensor_source_flag = "GENERIC_SAR"
+
+        opt_sensor_label = metadata_opt.get("satellite_type", "Cartosat-2S / Sentinel-2 Optical") if metadata_opt else "Cartosat-2S / Sentinel-2 Optical"
+
         explanation = (
-            f"Optical-SAR Cross-Modal Fusion Analysis: Joint processing of multi-spectral reflectance and "
-            f"C-band SAR microwave backscatter (VV/VH). Fused data resolves all-weather surface boundaries, "
-            f"identifying {water_pct}% specular water area and {urban_pct}% high-dielectric double-bounce urban structures. "
-            f"SAR backscatter validates cloud-obscured features."
+            f"Optical-SAR Cross-Modal Fusion Analysis ({opt_sensor_label} + {sar_sensor_label}):\n"
+            f"• Dual-Stream Processing: Jointly evaluated multi-spectral visible reflectance with calibrated C-band microwave backscatter.\n"
+            f"• Specular Water Inundation: Detected {water_pct}% open water area via low SAR backscatter (< -22 dB attenuation).\n"
+            f"• High-Dielectric Structural Built-Up: Resolved {urban_pct}% urban impervious structures via orthogonal double-bounce reflection.\n"
+            f"• All-Weather Penetration: Multi-sensor synergy verifies surface boundaries independent of cloud cover and solar illumination."
         )
 
         from models.geochat_wrapper import compute_dynamic_confidence
@@ -134,13 +150,15 @@ class OpticalSARFusionTool:
 
         prompt_sent_to_model = (
             f"<s>[INST] <<SYS>>\nYou are OpticalSARFusionNet, a cross-modal remote sensing model.\n<</SYS>>\n"
-            f"[Context]: Optical-SAR dual stream, Water_SAR={water_pct}%, Urban_SAR={urban_pct}%\n"
+            f"[Context]: Optical={opt_sensor_label}, SAR={sar_sensor_label}, Water_SAR={water_pct}%, Urban_SAR={urban_pct}%\n"
             f"[Query]: {query} [/INST]"
         )
 
         return {
             "tool_name": self.name,
             "query": query,
+            "sar_sensor": sar_sensor_label,
+            "sar_sensor_flag": sensor_source_flag,
             "sar_water_coverage_pct": water_pct,
             "sar_urban_coverage_pct": urban_pct,
             "explanation": explanation,

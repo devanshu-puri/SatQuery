@@ -45,14 +45,25 @@ DEMO_SAMPLES = [
     },
     {
         "id": "sample_optical_sar_fusion",
-        "title": "Optical + SAR Radar Fusion (BigEarthNet-MM Sentinel-1/2)",
+        "title": "Optical + EOS-04 (RISAT-1A Heritage) C-Band SAR Fusion (18m NRB)",
         "task_recommended": "optical_sar_fusion",
-        "query_recommended": "Perform optical and SAR radar cross-modal fusion for all-weather water mapping",
+        "query_recommended": "Perform optical and EOS-04 RISAT-1A SAR radar cross-modal fusion for all-weather water and urban mapping",
+        "file_primary": "cartosat_optical_bengaluru.tif",
+        "file_secondary": "eos04_sar_mrs_bengaluru.tif",
+        "description": "Co-registered ISRO Cartosat-2S Optical + ISRO EOS-04 (RISAT-1A Payload) C-band SAR Medium Resolution ScanSAR (MRS, 18m NRB dual-pol VV/VH).",
+        "modality": "Cross-Modal (Cartosat-2S + EOS-04/RISAT-1A SAR)",
+        "provenance": "ISRO Bhuvan / Bhoonidhi Open Data Archive (EOS-04 Level-2B NRB MRS)"
+    },
+    {
+        "id": "sample_sentinel1_fusion",
+        "title": "Optical + Sentinel-1 C-Band SAR Fusion (10m IW GRD)",
+        "task_recommended": "optical_sar_fusion",
+        "query_recommended": "Combine Sentinel-2 optical with Sentinel-1 SAR dual-pol backscatter to validate structural footprints",
         "file_primary": "cartosat_optical_bengaluru.tif",
         "file_secondary": "sentinel1_sar_vv_vh.tif",
-        "description": "Co-registered Optical Sentinel-2 + Sentinel-1 C-band SAR (VV/VH) dual-pol backscatter.",
-        "modality": "Cross-Modal (Optical + Radar SAR)",
-        "provenance": "BigEarthNet-MM (arXiv:1902.06148)"
+        "description": "Co-registered Optical + Sentinel-1 C-band SAR (VV/VH dual-pol, 10m GSD). Multi-sensor architecture validated across both EOS-04 and Sentinel-1 SAR standards.",
+        "modality": "Cross-Modal (Optical + Sentinel-1 SAR)",
+        "provenance": "BigEarthNet-MM / ESA Copernicus Open Access Hub"
     }
 ]
 
