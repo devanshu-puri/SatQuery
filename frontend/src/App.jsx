@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Sidebar from './components/Sidebar';
@@ -65,26 +65,16 @@ function App() {
 
     const handleSelectDemoSample = (sample) => {
         setSelectedDemoSample(sample);
+        setAgentResult(null);
         setQuery(sample.query_recommended);
         setSelectedTaskId(sample.task_recommended);
-        if (sample.primary_metadata?.center) {
-            setFlyToLocation({
-                lat: sample.primary_metadata.center.lat,
-                lon: sample.primary_metadata.center.lon,
-                zoom: 13
-            });
-        }
+        setFlyToLocation(null);
     };
 
     const handlePrimaryUpload = (uploadData) => {
         setPrimaryUpload(uploadData);
-        if (uploadData?.metadata?.center) {
-            setFlyToLocation({
-                lat: uploadData.metadata.center.lat,
-                lon: uploadData.metadata.center.lon,
-                zoom: 13
-            });
-        }
+        setAgentResult(null);
+        setFlyToLocation(null);
     };
 
     const handleSecondaryUpload = (uploadData) => {
@@ -94,14 +84,39 @@ function App() {
     const handleExploreArea = () => {
         // District centroid coords
         const coords = {
-            'Bengaluru Urban': { lat: 12.9716, lon: 77.5946, zoom: 11 },
-            'Bengaluru Rural': { lat: 13.2846, lon: 77.5946, zoom: 10 },
-            'Mysuru': { lat: 12.2958, lon: 76.6394, zoom: 11 },
-            'Mandya': { lat: 12.5242, lon: 76.8958, zoom: 10 },
+            'Bengaluru Urban': { lat: 12.9830, lon: 77.6210, zoom: 15 },
+            'Bengaluru Rural': { lat: 13.2846, lon: 77.5946, zoom: 12 },
+            'Mysuru': { lat: 12.2958, lon: 76.6394, zoom: 13 },
+            'Mandya': { lat: 12.5242, lon: 76.8958, zoom: 12 },
         };
-        const loc = coords[selectedArea] || { lat: 12.9716, lon: 77.5946, zoom: 11 };
+        const loc = coords[selectedArea] || { lat: 12.9830, lon: 77.6210, zoom: 15 };
         setFlyToLocation(loc);
     };
+
+    const currentRasterBounds = useMemo(() => {
+        if (activeMode === 'upload' && primaryUpload?.metadata?.wgs84_bounds) {
+            const b = primaryUpload.metadata.wgs84_bounds;
+            return [[b.min_lat, b.min_lon], [b.max_lat, b.max_lon]];
+        }
+        if (activeMode === 'demo' && selectedDemoSample?.primary_metadata?.wgs84_bounds) {
+            const b = selectedDemoSample.primary_metadata.wgs84_bounds;
+            return [[b.min_lat, b.min_lon], [b.max_lat, b.max_lon]];
+        }
+        return null;
+    }, [activeMode, primaryUpload, selectedDemoSample]);
+
+    const currentRasterPreview = useMemo(() => {
+        if (agentResult?.preview_url) {
+            return agentResult.preview_url;
+        }
+        if (activeMode === 'upload') {
+            return primaryUpload?.metadata?.preview_url || null;
+        }
+        if (activeMode === 'demo') {
+            return selectedDemoSample?.preview_url || null;
+        }
+        return null;
+    }, [agentResult, activeMode, primaryUpload, selectedDemoSample]);
 
     const handleAnalyze = async () => {
         if (!query.trim()) {
@@ -236,10 +251,12 @@ function App() {
                         <MapComponent
                             onGeometryChange={setGeometry}
                             sentinelTileUrl={sentinelData?.tile_url}
-                            analysisTileUrl={agentResult?.preview_url}
+                            analysisTileUrl={sentinelData?.analysis_tile_url || null}
                             analysisIndex={agentResult?.task_type}
                             flyToLocation={flyToLocation}
                             visualEvidence={agentResult?.visual_evidence}
+                            rasterBounds={currentRasterBounds}
+                            rasterOverlayUrl={currentRasterPreview}
                         />
                     </div>
                 </div>

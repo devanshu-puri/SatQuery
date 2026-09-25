@@ -66,10 +66,16 @@ def get_demo_samples_list() -> List[Dict[str, Any]]:
         p_meta = parse_geotiff(p_path) if os.path.exists(p_path) else None
         s_meta = parse_geotiff(s_path) if s_path and os.path.exists(s_path) else None
 
-        results.append({
+        entry = {
             **s,
             "primary_metadata": p_meta,
             "secondary_metadata": s_meta,
             "preview_url": p_meta.get("preview_url") if p_meta else None
-        })
+        }
+        if s["id"] == "sample_bitemporal_change":
+            entry["t1_acquisition_date"] = "2023-02-15"
+            entry["t2_acquisition_date"] = "2024-02-18"
+            entry["t1_preview_url"] = p_meta.get("preview_url") if p_meta else None
+            entry["t2_preview_url"] = s_meta.get("preview_url") if s_meta else None
+        results.append(entry)
     return results

@@ -1,0 +1,46 @@
+{
+  "model_id": "optical_sar_fusion_net",
+  "adapter_id": "adapter_c_bigearthnet_lora",
+  "dataset": "BigEarthNet-MM (Sentinel-1 SAR + Sentinel-2 / Cartosat-2S Optical)",
+  "dataset_size": 2000,
+  "num_epochs": 10,
+  "batch_size": 32,
+  "initial_loss": 0.3869,
+  "final_loss": 0.2805,
+  "training_duration_seconds": 13.12,
+  "training_date": "2026-09-25T08:37:24.449092Z",
+  "git_commit_hash": "fe79c22a83be3ac42996d976e81b6061f03a5d95",
+  "lora_parameters": {
+    "r": 16,
+    "lora_alpha": 32,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "trainable_params": 66323,
+    "total_params": 99347
+  },
+  "taxonomy": [
+    "Continuous urban fabric",
+    "Discontinuous urban fabric",
+    "Industrial or commercial units",
+    "Road and rail networks and associated land",
+    "Arable land",
+    "Permanent crops",
+    "Pastures",
+    "Complex cultivation patterns",
+    "Land principally occupied by agriculture",
+    "Broad-leaved forest",
+    "Coniferous forest",
+    "Mixed forest",
+    "Natural grassland",
+    "Moors and heathland",
+    "Sclerophyllous vegetation",
+    "Transitional woodland, shrub",
+    "Inland marshes",
+    "Peatbogs",
+    "Water bodies"
+  ],
+  "checkpoint_file": "adapter_model.bin",
+  "loss_curve_file": "training_loss.png"
+}

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { MapContainer, TileLayer, FeatureGroup, GeoJSON, ZoomControl, ScaleControl, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, FeatureGroup, GeoJSON, ZoomControl, ScaleControl, ImageOverlay, useMap } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { FiLayers, FiChevronDown } from 'react-icons/fi';
 import 'leaflet/dist/leaflet.css';
@@ -23,13 +23,34 @@ const FitGeoJSONBounds = ({ geojson }) => {
                 const layer = L.geoJSON(geojson);
                 const bounds = layer.getBounds();
                 if (bounds.isValid()) {
-                    map.fitBounds(bounds, { padding: [40, 40] });
+                    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 18, animate: true });
                 }
             } catch (e) {
                 console.error("Bounds error:", e);
             }
         }
     }, [geojson, map]);
+    return null;
+};
+
+const FitRasterBounds = ({ bounds }) => {
+    const map = useMap();
+    useEffect(() => {
+        if (bounds && Array.isArray(bounds) && bounds.length === 2 && bounds[0] && bounds[1]) {
+            try {
+                const [[minLat, minLon], [maxLat, maxLon]] = bounds;
+                if (!isNaN(minLat) && !isNaN(minLon) && !isNaN(maxLat) && !isNaN(maxLon)) {
+                    map.fitBounds([[minLat, minLon], [maxLat, maxLon]], {
+                        padding: [30, 30],
+                        maxZoom: 18,
+                        animate: true
+                    });
+                }
+            } catch (e) {
+                console.error("Failed to fit raster bounds:", e);
+            }
+        }
+    }, [bounds, map]);
     return null;
 };
 
@@ -40,7 +61,9 @@ const MapComponent = ({
     analysisIndex,
     flyToLocation,
     visualEvidence,
-    uploadedRasterPreview
+    uploadedRasterPreview,
+    rasterBounds,
+    rasterOverlayUrl
 }) => {
     const featureGroupRef = useRef();
     const [baseLayer, setBaseLayer] = useState('satellite');
@@ -126,12 +149,18 @@ const MapComponent = ({
             </div>
 
             <MapContainer
-                center={[20.5937, 78.9629]}
-                zoom={5}
-                maxZoom={21}
+                center={
+                    rasterBounds ? [
+                        (rasterBounds[0][0] + rasterBounds[1][0]) / 2,
+                        (rasterBounds[0][1] + rasterBounds[1][1]) / 2
+                    ] : [12.9830, 77.6210]
+                }
+                zoom={rasterBounds ? 15 : 13}
+                maxZoom={20}
                 className="h-full w-full bg-space-900"
                 zoomControl={false}
             >
+                <FitRasterBounds bounds={rasterBounds} />
                 <FlyToLocation location={flyToLocation} />
                 {visualEvidence && <FitGeoJSONBounds geojson={visualEvidence} />}
 
@@ -142,14 +171,15 @@ const MapComponent = ({
                     <TileLayer
                         attribution="Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics"
                         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                        maxZoom={21}
-                        maxNativeZoom={19}
+                        maxZoom={20}
+                        maxNativeZoom={18}
+                        errorTileUrl="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                 ) : (
                     <TileLayer
                         attribution='&copy; OpenStreetMap contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        maxZoom={21}
+                        maxZoom={20}
                     />
                 )}
 
@@ -165,9 +195,19 @@ const MapComponent = ({
                     <TileLayer url={sentinelTileUrl} attribution="Google Earth Engine" maxNativeZoom={16} />
                 )}
 
-                {/* GEE Analysis Layer Overlay */}
-                {analysisTileUrl && (
+                {/* GEE Analysis Layer Overlay - Only for genuine web tile URLs */}
+                {analysisTileUrl && typeof analysisTileUrl === 'string' && analysisTileUrl.startsWith('http') && (
                     <TileLayer url={analysisTileUrl} opacity={0.75} attribution="GEE Analysis" maxNativeZoom={16} />
+                )}
+
+                {/* Satellite GeoTIFF Raster Image Overlay within exact spatial WGS84 bounding box */}
+                {rasterBounds && rasterOverlayUrl && (
+                    <ImageOverlay
+                        url={rasterOverlayUrl}
+                        bounds={rasterBounds}
+                        opacity={0.88}
+                        zIndex={350}
+                    />
                 )}
 
                 {/* Vector GeoJSON Visual Evidence Overlay (Grounded Bounding Boxes / Change Polygons) */}

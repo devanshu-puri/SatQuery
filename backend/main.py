@@ -124,67 +124,98 @@ def fetch_gee(request: GEEFetchRequest):
     )
     return res
 
+@app.post("/api/fetch/gee/bitemporal")
+def fetch_gee_bitemporal_endpoint(request: GEEFetchRequest):
+    """Bug 4: Fetches dual-timestamp co-registered GEE imagery for change detection."""
+    from ingestion.gee_fetcher import fetch_gee_bitemporal
+    res = fetch_gee_bitemporal(
+        aoi_geojson=request.geometry,
+        start_date=request.start_date,
+        end_date=request.end_date,
+        max_cloud_cover=request.max_cloud_cover
+    )
+    return res
+
 @app.post("/api/query")
 async def execute_query(request: QueryRequest):
     """
     Main Agent Entrypoint.
     Classifies task, validates inputs, executes specialized RS model,
-    estimates confidence, logs execution trace, and stores in session history.
+    estimates dynamic confidence, logs execution trace, and stores in session history.
+    Never uses synthetic random noise fallback.
     """
+    from geospatial.raster_parser import crop_raster_by_aoi
+    import rasterio
+
     primary_arr = None
     secondary_arr = None
     meta_primary = None
     meta_secondary = None
 
     # Option A: Demo Sample Mode
-    if request.demo_sample_id:
+    demo_sample_id = request.demo_sample_id
+    # If no upload and no sample id specified, infer sample from query or task mode
+    if not demo_sample_id and not request.primary_upload_id:
+        q_l = request.query.lower()
+        if any(w in q_l for w in ["change", "before and after", "what changed", "difference", "interval"]) or request.task_mode == "bitemporal_change":
+            demo_sample_id = "sample_bitemporal_change"
+        elif any(w in q_l for w in ["sar", "radar", "optical + sar", "fusion", "cross-modal"]) or request.task_mode == "optical_sar_fusion":
+            demo_sample_id = "sample_optical_sar_fusion"
+        elif any(w in q_l for w in ["where", "locate", "ground", "find"]) or request.task_mode == "region_grounding":
+            demo_sample_id = "sample_grounding"
+        else:
+            demo_sample_id = "sample_optical_vqa"
+
+    if demo_sample_id:
         samples = get_demo_samples_list()
-        match = next((s for s in samples if s["id"] == request.demo_sample_id), None)
+        match = next((s for s in samples if s["id"] == demo_sample_id), None)
         if match:
             p_file = os.path.join(SAMPLES_DIR, match["file_primary"])
             s_file = os.path.join(SAMPLES_DIR, match["file_secondary"]) if match.get("file_secondary") else None
 
-            import rasterio
             if os.path.exists(p_file):
-                with rasterio.open(p_file) as src:
-                    primary_arr = normalize_to_8bit_rgb(src.read())
-                    meta_primary = match.get("primary_metadata")
+                raw_p, primary_arr, crop_meta_p = crop_raster_by_aoi(p_file, request.aoi_geometry)
+                meta_primary = {**(match.get("primary_metadata") or {}), **crop_meta_p, "raw_bands": raw_p, "is_demo_pair": bool(s_file)}
+                if demo_sample_id == "sample_bitemporal_change":
+                    meta_primary["acquisition_date"] = match.get("t1_acquisition_date", "2023-02-15")
+
             if s_file and os.path.exists(s_file):
-                with rasterio.open(s_file) as src:
-                    secondary_arr = normalize_to_8bit_rgb(src.read())
-                    meta_secondary = match.get("secondary_metadata")
+                raw_s, secondary_arr, crop_meta_s = crop_raster_by_aoi(s_file, request.aoi_geometry)
+                meta_secondary = {**(match.get("secondary_metadata") or {}), **crop_meta_s, "raw_bands": raw_s, "is_demo_pair": True}
+                if demo_sample_id == "sample_bitemporal_change":
+                    meta_secondary["acquisition_date"] = match.get("t2_acquisition_date", "2024-02-18")
 
     # Option B: Uploaded Files
     if primary_arr is None and request.primary_upload_id:
         p_info = get_upload(request.primary_upload_id)
-        if p_info:
-            meta_primary = p_info["metadata"]
-            import rasterio
-            with rasterio.open(p_info["temp_path"]) as src:
-                primary_arr = normalize_to_8bit_rgb(src.read())
+        if p_info and os.path.exists(p_info["temp_path"]):
+            raw_p, primary_arr, crop_meta_p = crop_raster_by_aoi(p_info["temp_path"], request.aoi_geometry)
+            meta_primary = {**(p_info.get("metadata") or {}), **crop_meta_p, "raw_bands": raw_p}
 
     if secondary_arr is None and request.secondary_upload_id:
         s_info = get_upload(request.secondary_upload_id)
-        if s_info:
-            meta_secondary = s_info["metadata"]
-            import rasterio
-            with rasterio.open(s_info["temp_path"]) as src:
-                secondary_arr = normalize_to_8bit_rgb(src.read())
+        if s_info and os.path.exists(s_info["temp_path"]):
+            raw_s, secondary_arr, crop_meta_s = crop_raster_by_aoi(s_info["temp_path"], request.aoi_geometry)
+            meta_secondary = {**(s_info.get("metadata") or {}), **crop_meta_s, "raw_bands": raw_s}
 
-    # Fallback to simulated AOI reflectance if no upload or sample selected
+    # Bug 1 Fix: Explicit error state when no real raster is available (NEVER random noise!)
     if primary_arr is None:
-        primary_arr = np.random.randint(60, 190, (256, 256, 3), dtype=np.uint8)
-        if "vegetation" in request.query.lower():
-            primary_arr[:, :, 1] = np.clip(primary_arr[:, :, 1] + 50, 0, 255)
-        elif "water" in request.query.lower():
-            primary_arr[:, :, 2] = np.clip(primary_arr[:, :, 2] + 60, 0, 255)
-        meta_primary = {
-            "crs": "EPSG:4326",
-            "modality": "Optical (Multispectral Sentinel-2)",
-            "satellite_type": "Sentinel-2 MSI Harmonized",
-            "dimensions": {"width": 256, "height": 256},
-            "resolution_approx": {"x": 10.0, "y": 10.0},
-            "affine_transform": [0.0001, 0.0, 77.59, 0.0, -0.0001, 12.97]
+        return {
+            "evidence_unavailable": True,
+            "evidence_reason": "No satellite imagery or raster uploaded or selected for this AOI.",
+            "query": request.query,
+            "task_type": request.task_mode or "single_image_vqa",
+            "response": "Analysis unavailable: No valid raster imagery found for the requested Area of Interest. Please select a benchmark sample or upload a GeoTIFF.",
+            "confidence_score": 0.0,
+            "visual_evidence": None,
+            "preview_url": None,
+            "bitemporal_previews": None,
+            "intent_tool_mismatch": False,
+            "extra_stats": {},
+            "execution_trace": {
+                "task_selected": request.task_mode,
+                "error": "Raster image unavailable. np.random fallback disabled."
+            }
         }
 
     # Execute Agent Pipeline
@@ -197,6 +228,7 @@ async def execute_query(request: QueryRequest):
         mode_override=request.task_mode
     )
 
+    result["evidence_unavailable"] = False
     query_id = f"qry_{uuid.uuid4().hex[:8]}"
     result["query_id"] = query_id
     result["timestamp"] = datetime.utcnow().isoformat()

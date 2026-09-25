@@ -161,8 +161,10 @@ def generate_evaluation_pdf(
             img_bytes = base64.b64decode(raw_b64)
             pil_img = Image.open(io.BytesIO(img_bytes))
             
-            # Save temporary image for reportlab inclusion
-            temp_img_path = os.path.join(os.path.dirname(__file__), "temp_preview.png")
+            # Save unique temporary image for reportlab inclusion
+            import uuid
+            unique_id = uuid.uuid4().hex[:8]
+            temp_img_path = os.path.join(os.path.dirname(__file__), f"temp_preview_{unique_id}.png")
             pil_img.save(temp_img_path, format="PNG")
             
             elements.append(Paragraph("<b>3. Visual Evidence & Spatial Localization</b>", heading_style))
@@ -170,13 +172,13 @@ def generate_evaluation_pdf(
             elements.append(Spacer(1, 10))
         except Exception as e:
             print(f"Failed to embed image into PDF: {e}")
+            temp_img_path = None
 
     # Build PDF
     doc.build(elements)
     
     # Cleanup temp image if created
-    temp_img_path = os.path.join(os.path.dirname(__file__), "temp_preview.png")
-    if os.path.exists(temp_img_path):
+    if 'temp_img_path' in locals() and temp_img_path and os.path.exists(temp_img_path):
         try:
             os.remove(temp_img_path)
         except Exception:

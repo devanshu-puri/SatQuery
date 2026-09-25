@@ -171,15 +171,26 @@ def parse_geotiff(file_path: str) -> Dict[str, Any]:
         rgb_preview = normalize_to_8bit_rgb(raster_data)
         preview_base64 = generate_preview_base64(rgb_preview)
 
-        # Approximate spatial resolution in meters
-        res_x, res_y = abs(src.transform.a), abs(src.transform.e)
+        # Approximate spatial resolution (Ground Sample Distance) in meters
+        res_x_raw, res_y_raw = abs(src.transform.a), abs(src.transform.e)
+        if (src.crs and getattr(src.crs, "is_geographic", False)) or res_x_raw < 0.1:
+            lat_rad = np.radians(center_lat)
+            gsd_x = res_x_raw * 111320.0 * np.cos(lat_rad)
+            gsd_y = res_y_raw * 111320.0
+        else:
+            gsd_x = res_x_raw
+            gsd_y = res_y_raw
+
+        pixel_area_ha = (gsd_x * gsd_y) / 10000.0
+        total_scene_ha = round((width * height) * pixel_area_ha, 2)
 
         return {
             "filename": os.path.basename(file_path),
             "file_size_bytes": os.path.getsize(file_path),
             "crs": crs_str,
             "dimensions": {"width": width, "height": height},
-            "resolution_approx": {"x": round(res_x, 4), "y": round(res_y, 4)},
+            "resolution_approx": {"x": float(round(gsd_x, 2)), "y": float(round(gsd_y, 2)), "raw_x": float(round(res_x_raw, 6)), "raw_y": float(round(res_y_raw, 6))},
+            "total_area_ha": float(total_scene_ha),
             "native_bounds": {
                 "left": bounds.left,
                 "bottom": bounds.bottom,
@@ -202,3 +213,72 @@ def parse_geotiff(file_path: str) -> Dict[str, Any]:
             "preview_url": preview_base64,
             "nodata_value": src.nodata
         }
+
+def crop_raster_by_aoi(
+    file_path: str,
+    aoi_geojson: Optional[Dict[str, Any]] = None
+) -> Tuple[np.ndarray, np.ndarray, Dict[str, Any]]:
+    """
+    Reads a raster and optionally crops strictly to the AOI GeoJSON geometry.
+    Reprojects GeoJSON coordinates to dataset CRS if needed.
+    Returns:
+        (raw_bands_array, rgb_8bit_array, updated_metadata)
+    """
+    import rasterio.mask
+    from shapely.geometry import shape
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"File not found: {file_path}")
+
+    with rasterio.open(file_path) as src:
+        crs_str = get_crs_string(src.crs)
+        transform = list(src.transform)
+
+        if aoi_geojson:
+            try:
+                geom = shape(aoi_geojson)
+                # Reproject geometry if raster CRS is not WGS84
+                if src.crs and src.crs.to_string() != "EPSG:4326":
+                    project = pyproj.Transformer.from_crs("EPSG:4326", src.crs, always_xy=True).transform
+                    import shapely.ops
+                    geom_proj = shapely.ops.transform(project, geom)
+                else:
+                    geom_proj = geom
+
+                out_image, out_transform = rasterio.mask.mask(src, [geom_proj], crop=True)
+                if out_image.shape[1] == 0 or out_image.shape[2] == 0 or not np.any(out_image):
+                    raw_bands = src.read()
+                    transform = list(src.transform)
+                else:
+                    raw_bands = out_image
+                    transform = list(out_transform)
+            except Exception:
+                # If geometry does not intersect, fallback to full raster read
+                raw_bands = src.read()
+                transform = list(src.transform)
+        else:
+            raw_bands = src.read()
+            transform = list(src.transform)
+
+        res_x_raw, res_y_raw = abs(transform[0]), abs(transform[4])
+        center_lat = 12.9716
+        if src.bounds:
+            center_lat = (src.bounds.bottom + src.bounds.top) / 2.0
+        if (src.crs and getattr(src.crs, "is_geographic", False)) or res_x_raw < 0.1:
+            lat_rad = np.radians(center_lat)
+            gsd_x = res_x_raw * 111320.0 * np.cos(lat_rad)
+            gsd_y = res_y_raw * 111320.0
+        else:
+            gsd_x = res_x_raw
+            gsd_y = res_y_raw
+
+        rgb_8bit = normalize_to_8bit_rgb(raw_bands)
+        meta = {
+            "crs": crs_str,
+            "affine_transform": transform,
+            "dimensions": {"width": raw_bands.shape[2], "height": raw_bands.shape[1]},
+            "resolution_approx": {"x": float(round(gsd_x, 2)), "y": float(round(gsd_y, 2)), "raw_x": float(round(res_x_raw, 6)), "raw_y": float(round(res_y_raw, 6))},
+            "band_count": raw_bands.shape[0]
+        }
+        return raw_bands, rgb_8bit, meta
+

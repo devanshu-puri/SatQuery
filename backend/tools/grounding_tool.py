@@ -4,10 +4,12 @@ Locates target spatial features/land-covers specified in natural language querie
 and outputs bounding boxes with EPSG:4326 GeoJSON vector polygons.
 """
 
+import time
 from typing import Dict, Any, Optional, List
 import numpy as np
 from models.geochat_wrapper import GeoChatVLM
 from geospatial.grounding_utils import pixel_box_to_geojson_polygon, build_geojson_feature_collection
+from geospatial.raster_parser import generate_preview_base64
 
 class RegionGroundingTool:
     name = "RegionGroundingTool"
@@ -22,19 +24,20 @@ class RegionGroundingTool:
         query: str,
         metadata: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
+        start_t = time.perf_counter()
         ground_res = self.vlm.ground_regions(rgb_array, query, metadata)
         caption_res = self.vlm.generate_caption(rgb_array, metadata)
 
         # Convert normalized bounding boxes to real-world GeoJSON features
         features = []
-        if metadata:
+        if metadata and "dimensions" in metadata and "affine_transform" in metadata:
             width = metadata["dimensions"]["width"]
             height = metadata["dimensions"]["height"]
             affine = metadata["affine_transform"]
-            crs_str = metadata["crs"]
+            crs_str = metadata.get("crs", "EPSG:4326")
         else:
-            height, width, _ = rgb_array.shape
-            affine = [1.0, 0.0, 0.0, 0.0, -1.0, 0.0]
+            height, width = rgb_array.shape[:2]
+            affine = [0.0001, 0.0, 77.59, 0.0, -0.0001, 12.97]
             crs_str = "EPSG:4326"
 
         for idx, box in enumerate(ground_res["bounding_boxes_norm"]):
@@ -51,6 +54,8 @@ class RegionGroundingTool:
             features.append(feat)
 
         geojson_fc = build_geojson_feature_collection(features)
+        preview_url = generate_preview_base64(rgb_array[:, :, :3])
+        elapsed_ms = round((time.perf_counter() - start_t) * 1000, 2)
 
         return {
             "tool_name": self.name,
@@ -60,5 +65,9 @@ class RegionGroundingTool:
             "caption": caption_res["caption"],
             "confidence_score": ground_res["confidence"],
             "visual_evidence": geojson_fc,
-            "bounding_boxes_norm": ground_res["bounding_boxes_norm"]
+            "preview_url": preview_url,
+            "bounding_boxes_norm": ground_res["bounding_boxes_norm"],
+            "prompt_sent_to_model": ground_res.get("prompt_sent_to_model"),
+            "confidence_penalties": ground_res.get("confidence_penalties", []),
+            "internal_latency_ms": elapsed_ms
         }

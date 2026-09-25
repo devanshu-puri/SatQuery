@@ -1,0 +1,34 @@
+{
+  "peft_type": "LORA",
+  "task_type": "FEATURE_EXTRACTION / MULTIMODAL_VQA",
+  "r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  "base_model_name_or_path": "GeoChat-7B / BigEarthNet Dual-Encoder",
+  "num_classes": 19,
+  "classes": [
+    "Continuous urban fabric",
+    "Discontinuous urban fabric",
+    "Industrial or commercial units",
+    "Road and rail networks and associated land",
+    "Arable land",
+    "Permanent crops",
+    "Pastures",
+    "Complex cultivation patterns",
+    "Land principally occupied by agriculture",
+    "Broad-leaved forest",
+    "Coniferous forest",
+    "Mixed forest",
+    "Natural grassland",
+    "Moors and heathland",
+    "Sclerophyllous vegetation",
+    "Transitional woodland, shrub",
+    "Inland marshes",
+    "Peatbogs",
+    "Water bodies"
+  ]
+}

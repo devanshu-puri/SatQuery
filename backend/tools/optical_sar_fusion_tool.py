@@ -124,14 +124,31 @@ class OpticalSARFusionTool:
             f"SAR backscatter validates cloud-obscured features."
         )
 
+        from models.geochat_wrapper import compute_dynamic_confidence
+        conf, penalties = compute_dynamic_confidence(
+            image_array=fused_rgb,
+            query=query,
+            task_type="optical_sar_fusion",
+            target_mask=target_mask
+        )
+
+        prompt_sent_to_model = (
+            f"<s>[INST] <<SYS>>\nYou are OpticalSARFusionNet, a cross-modal remote sensing model.\n<</SYS>>\n"
+            f"[Context]: Optical-SAR dual stream, Water_SAR={water_pct}%, Urban_SAR={urban_pct}%\n"
+            f"[Query]: {query} [/INST]"
+        )
+
         return {
             "tool_name": self.name,
             "query": query,
             "sar_water_coverage_pct": water_pct,
             "sar_urban_coverage_pct": urban_pct,
             "explanation": explanation,
-            "confidence_score": 0.94,
+            "confidence_score": conf,
             "fused_preview_url": fused_preview_base64,
+            "preview_url": fused_preview_base64,
             "visual_evidence": geojson_fc,
-            "bounding_boxes_norm": fused_boxes
+            "bounding_boxes_norm": fused_boxes,
+            "prompt_sent_to_model": prompt_sent_to_model,
+            "confidence_penalties": penalties
         }
