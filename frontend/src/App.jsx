@@ -7,6 +7,7 @@ import ResultsPanel from './components/ResultsPanel';
 import ModelCardModal from './components/ModelCardModal';
 import SessionHistoryDrawer from './components/SessionHistoryDrawer';
 import EvaluationModal from './components/EvaluationModal';
+import { FiArrowUp, FiCrosshair } from 'react-icons/fi';
 import {
     fetchHealth,
     fetchModels,
@@ -42,7 +43,6 @@ function App() {
     const [activeMode, setActiveMode] = useState('demo'); // 'demo' | 'upload' | 'gee'
     const [primaryUpload, setPrimaryUpload] = useState(null);
     const [secondaryUpload, setSecondaryUpload] = useState(null);
-    const [selectedTaskId, setSelectedTaskId] = useState('single_image_vqa');
     const [query, setQuery] = useState('What is the agricultural and crop condition in this scene?');
 
     // GEE State
@@ -72,7 +72,6 @@ function App() {
             if (res.samples && res.samples.length > 0) {
                 setSelectedDemoSample(res.samples[0]);
                 setQuery(res.samples[0].query_recommended);
-                setSelectedTaskId(res.samples[0].task_recommended);
             }
         }).catch(() => {});
         fetchSessionHistory().then(res => setSessionHistory(res.history || [])).catch(() => {});
@@ -82,7 +81,6 @@ function App() {
         setSelectedDemoSample(sample);
         setAgentResult(null);
         setQuery(sample.query_recommended);
-        setSelectedTaskId(sample.task_recommended);
         setFlyToLocation(null);
     };
 
@@ -139,6 +137,8 @@ function App() {
             return;
         }
 
+        setAgentResult(null);
+        setSentinelData(null);
         setIsStreaming(true);
         setStreamSteps([
             { step: 'Classifying Query Intent', detail: `Parsing query semantics: "${query}"` },
@@ -168,7 +168,9 @@ function App() {
                 demo_sample_id: activeMode === 'demo' ? selectedDemoSample?.id : null,
                 primary_upload_id: activeMode === 'upload' ? primaryUpload?.upload_id : null,
                 secondary_upload_id: activeMode === 'upload' ? secondaryUpload?.upload_id : null,
-                task_mode: selectedTaskId,
+                // The agent owns routing by default. The visible task choices remain
+                // useful prompts, but cannot silently override a natural-language request.
+                task_mode: null,
                 aoi_geometry: geometry
             };
 
@@ -187,7 +189,6 @@ function App() {
     const handleSelectHistoryItem = (item) => {
         setAgentResult(item);
         setQuery(item.query);
-        setSelectedTaskId(item.task_type);
     };
 
     const handleSelectFeature = (featureQuery) => {
@@ -204,7 +205,7 @@ function App() {
     );
 
     return (
-        <div className="h-screen w-screen overflow-y-auto overflow-x-hidden bg-space-900 flex flex-col">
+        <div className="min-h-screen w-screen overflow-y-auto overflow-x-hidden bg-white flex flex-col">
             <Header
                 onOpenModels={() => setIsModelsOpen(true)}
                 onOpenHistory={() => setIsHistoryOpen(true)}
@@ -237,7 +238,13 @@ function App() {
                 onSelectFeature={handleSelectFeature}
             />
 
-            <section id="explore" className="relative flex flex-row flex-1 min-h-[850px] w-full overflow-hidden border-t border-space-800">
+            <section id="explore" className="workspace-section">
+                <div className="workspace-intro">
+                    <p className="eyebrow">ANALYSIS WORKSPACE</p>
+                    <h2>Evidence, without the noise.</h2>
+                    <p>Select a satellite source, formulate a question, and inspect the resulting trace beside the scene.</p>
+                </div>
+                <div className="workspace-grid">
                 <Sidebar
                     states={states}
                     selectedState={selectedState}
@@ -256,8 +263,6 @@ function App() {
                     onPrimaryUpload={handlePrimaryUpload}
                     secondaryUpload={secondaryUpload}
                     onSecondaryUpload={handleSecondaryUpload}
-                    selectedTaskId={selectedTaskId}
-                    onSelectTaskId={setSelectedTaskId}
                     demoSamples={demoSamples}
                     selectedDemoSample={selectedDemoSample}
                     onSelectDemoSample={handleSelectDemoSample}
@@ -269,8 +274,8 @@ function App() {
                     onGeeCloudCoverChange={setGeeCloudCover}
                 />
 
-                <div className="relative flex-1 w-1/2 h-full p-3">
-                    <div className="h-full w-full overflow-hidden rounded-2xl shadow-2xl ring-1 ring-space-700/60">
+                <div className="map-panel">
+                    <div className="map-frame">
                         <MapComponent
                             onGeometryChange={setGeometry}
                             sentinelTileUrl={sentinelData?.tile_url}
@@ -284,6 +289,20 @@ function App() {
                     </div>
                 </div>
 
+                <div className="query-composer">
+                    <FiCrosshair className="query-icon" aria-hidden="true" />
+                    <textarea
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        rows={1}
+                        placeholder="Ask about water, vegetation, buildings, change, or radar..."
+                        aria-label="Satellite analysis question"
+                    />
+                    <button onClick={handleAnalyze} disabled={!canAnalyze} title="Run analysis">
+                        <span>Analyze</span><FiArrowUp />
+                    </button>
+                </div>
+
                 <ResultsPanel
                     query={query}
                     sentinelData={sentinelData}
@@ -294,6 +313,7 @@ function App() {
                     isStreaming={isStreaming}
                     streamSteps={streamSteps}
                 />
+                </div>
             </section>
         </div>
     );

@@ -103,7 +103,7 @@ def generate_evaluation_pdf(
         ],
         [
             Paragraph("<b>Model Invoked:</b>", body_style),
-            Paragraph(f"{trace.get('model_invoked', 'GeoChat-7B (BigEarthNet-LoRA)')}", body_style)
+            Paragraph(f"{trace.get('model_invoked', 'Not available')}", body_style)
         ],
         [
             Paragraph("<b>SAR Provenance:</b>", body_style),
@@ -123,8 +123,8 @@ def generate_evaluation_pdf(
     elements.append(Spacer(1, 12))
 
     # AI Textual Response & Analysis
-    elements.append(Paragraph("<b>1. Multi-Modal Remote Sensing AI Response</b>", heading_style))
-    resp_text = query_result.get("response", "No response generated.")
+    elements.append(Paragraph("<b>1. Human-Readable Analysis</b>", heading_style))
+    resp_text = query_result.get("human_summary") or query_result.get("response", "No response generated.")
     resp_box = Table([[Paragraph(resp_text, body_style)]], colWidths=[540])
     resp_box.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#EFF6FF')),
@@ -134,8 +134,19 @@ def generate_evaluation_pdf(
     elements.append(resp_box)
     elements.append(Spacer(1, 12))
 
+    elements.append(Paragraph("<b>2. Technical Evidence</b>", heading_style))
+    technical_text = query_result.get("response", "No technical response generated.")
+    technical_box = Table([[Paragraph(technical_text.replace("\n", "<br/>"), body_style)]], colWidths=[540])
+    technical_box.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor('#F8FAFC')),
+        ('BOX', (0, 0), (-1, -1), 1, colors.HexColor('#CBD5E1')),
+        ('PADDING', (0, 0), (-1, -1), 8),
+    ]))
+    elements.append(technical_box)
+    elements.append(Spacer(1, 12))
+
     # Auditable Execution Trace Table
-    elements.append(Paragraph("<b>2. Auditable Execution Trace (Grading Artifact)</b>", heading_style))
+    elements.append(Paragraph("<b>3. Auditable Execution Trace</b>", heading_style))
     meta_in = trace.get("input_metadata", {})
     trace_data = [
         [Paragraph("<b>Parameter / Trace Item</b>", body_style), Paragraph("<b>Logged Execution Value</b>", body_style)],

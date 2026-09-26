@@ -16,7 +16,9 @@ from gee_service import initialize_gee
 from ingestion.gee_fetcher import fetch_gee_layer
 from ingestion.upload_handler import process_upload, get_upload
 from agent.router import AgentController
+from agent.multilingual import interpret_query
 from models.registry import ModelRegistry
+from models.model_manager import ModelManager
 from reporting.pdf_generator import generate_evaluation_pdf
 from data.sample_loader import get_demo_samples_list, SAMPLES_DIR
 from geospatial import parse_geotiff, normalize_to_8bit_rgb
@@ -92,32 +94,14 @@ async def startup_event():
         GEE_STATUS = {"authenticated": False, "message": f"GEE Auth Fallback (Demo & Upload Modes Active): {e}"}
         print(GEE_STATUS["message"])
 
-    try:
-        adapter_proof = ModelRegistry.verify_adapter_probe()
-        app.state.adapter_proof = adapter_proof
-        print(f"[ADAPTER_PROOF] {adapter_proof['adapter_name']} SHA256={adapter_proof['adapter_sha256']} logit_diff={max(abs(a-b) for a, b in zip(adapter_proof['base_logits'], adapter_proof['adapter_logits'])):.6f}")
-    except Exception as exc:
-        app.state.adapter_proof = {"probe_passed": False, "error": str(exc)}
-        print(f"[ADAPTER_PROOF] FAILED: {exc}")
-
-    try:
-        from models.geochat_wrapper import GeoChatVLM
-        probe_model = GeoChatVLM(model_id="geochat_7b")
-        probe_input = np.zeros((64, 64, 3), dtype=np.uint8)
-        probe_input[16:48, 16:48, :] = 255
-        probe_result = probe_model.generate(probe_input, "Does this scene contain water?")
-        passed = bool(probe_result.get("model_forward_pass") and probe_result["model_forward_pass"].get("logits"))
-        app.state.geochat_probe = {
-            "passed": passed,
-            "status": "PASS" if passed else "PARTIAL",
-            "model_id": "geochat_7b",
-            "predicted_class": probe_result.get("model_forward_pass", {}).get("predicted_class"),
-            "prompt": probe_result.get("prompt_sent_to_model"),
-            "note": "Geospatial model loaded and responded to probe input" if passed else "Probe failed at model load or inference time",
-        }
-    except Exception as exc:
-        app.state.geochat_probe = {"passed": False, "status": "PARTIAL", "error": str(exc), "note": "GeoChat checkpoint unavailable or failed probe"}
-        print(f"[GEOCHAT_PROBE] FAILED: {exc}")
+    app.state.adapter_proof = ModelRegistry.verify_adapter_probe()
+    manager = ModelManager.instance()
+    if os.getenv("SATQUERY_PRELOAD_MODELS", "false").lower() == "true":
+        try:
+            manager.load()
+        except Exception as exc:
+            print(f"[VLM] preload unavailable: {exc}")
+    app.state.geochat_probe = manager.integrity()
 
 # Request / Response Schemas
 class GEEFetchRequest(BaseModel):
@@ -149,12 +133,12 @@ def health_check():
         "subsystems": {
             "api_server": "Operational",
             "gee_connection": GEE_STATUS,
-            "agent_controller": "Ready (Inference Active)",
+            "agent_controller": "Operational",
             "models_registry": {
                 "active_models_count": len(ModelRegistry.list_models()),
-                "geochat_status": "Ready",
-                "optical_sar_fusion_status": "Ready",
-                "cdvqa_siamese_status": "Ready"
+                "geochat_status": ModelManager.instance().integrity()["status"],
+                "optical_sar_fusion_status": "PARTIAL (classical verification)",
+                "cdvqa_siamese_status": "PARTIAL (classical verification)"
             },
             "rasterio_gdal": "Loaded & Functional"
         }
@@ -180,12 +164,7 @@ def model_integrity():
     real_risat_exists = os.path.exists(real_risat_file)
     adapter_manifest = load_json_if_exists(bigearthnet_manifest)
     adapter_probe = getattr(app.state, "adapter_proof", {})
-    rs_adaptation_pass = bool(
-        os.path.exists(bigearthnet_adapter)
-        and os.path.exists(bigearthnet_manifest)
-        and adapter_manifest is not None
-        and bool(adapter_probe.get("probe_passed"))
-    )
+    rs_adaptation_pass = bool(adapter_probe.get("probe_passed"))
 
     rs_adaptation = {
         "status": "PASS" if rs_adaptation_pass else "PARTIAL",
@@ -196,7 +175,7 @@ def model_integrity():
         "training_loss_file": os.path.basename(bigearthnet_loss) if os.path.exists(bigearthnet_loss) else None,
         "adapter_file": bigearthnet_adapter,
         "adapter_proof": adapter_probe,
-        "note": "Adapter file + manifest + self-test are present and valid" if rs_adaptation_pass else "Adapter file, manifest, or self-test failed or is missing",
+        "note": "Adapter was injected into a compatible base model and verified by inference" if rs_adaptation_pass else "Adapter files may be present, but no compatible base-model injection and inference verification has run.",
     }
 
     vrsbench_check = _eval_status(vrsbench_result, "VRSBench")
@@ -210,13 +189,15 @@ def model_integrity():
         "note": "EOS-04 / RISAT-1A heritage SAR (18m NRB MRS)" if real_risat_exists else "Sentinel-1 C-band SAR — RISAT-class proxy pending Bhoonidhi access",
     }
 
-    geochat_probe = getattr(app.state, "geochat_probe", {"passed": False, "status": "PARTIAL"})
+    geochat_probe = ModelManager.instance().integrity()
     geochat_checkpoint = {
         "status": geochat_probe.get("status", "PARTIAL"),
-        "passed": bool(geochat_probe.get("passed")),
-        "model_id": geochat_probe.get("model_id", "geochat_7b"),
-        "predicted_class": geochat_probe.get("predicted_class"),
-        "note": geochat_probe.get("note", "GeoChat checkpoint unavailable or failed probe"),
+        "passed": bool(geochat_probe.get("checkpoint_loaded")),
+        "model_id": geochat_probe.get("model_id"),
+        "checkpoint_path": geochat_probe.get("checkpoint_path"),
+        "device": geochat_probe.get("device"),
+        "dtype": geochat_probe.get("dtype"),
+        "note": geochat_probe.get("last_error") or "Real checkpoint loaded; inference is available.",
         "probe": geochat_probe,
     }
 
@@ -276,6 +257,7 @@ def model_integrity():
         "risat_data": risat_data,
         "risat_sar": risat_data,
         "geochat_checkpoint": geochat_checkpoint,
+        "geochat": geochat_probe,
         "change_model": change_model,
         "fusion_model": fusion_model,
     }
@@ -339,14 +321,15 @@ async def execute_query(request: QueryRequest):
 
     # Option A: Demo Sample Mode
     demo_sample_id = request.demo_sample_id
-    # If no upload and no sample id specified, infer sample from query or task mode
+    # If no upload and no sample id specified, infer a compatible demo pair from
+    # the multilingual controller intent. This never creates synthetic imagery.
     if not demo_sample_id and not request.primary_upload_id:
-        q_l = request.query.lower()
-        if any(w in q_l for w in ["change", "before and after", "what changed", "difference", "interval"]) or request.task_mode == "bitemporal_change":
+        interpreted = interpret_query(request.query)
+        if interpreted["intent"] == "bitemporal_change" or request.task_mode == "bitemporal_change":
             demo_sample_id = "sample_bitemporal_change"
-        elif any(w in q_l for w in ["sar", "radar", "optical + sar", "fusion", "cross-modal"]) or request.task_mode == "optical_sar_fusion":
+        elif interpreted["intent"] == "optical_sar_fusion" or request.task_mode == "optical_sar_fusion":
             demo_sample_id = "sample_optical_sar_fusion"
-        elif any(w in q_l for w in ["where", "locate", "ground", "find"]) or request.task_mode == "region_grounding":
+        elif interpreted["intent"] == "region_grounding" or request.task_mode == "region_grounding":
             demo_sample_id = "sample_grounding"
         else:
             demo_sample_id = "sample_optical_vqa"
@@ -413,9 +396,32 @@ async def execute_query(request: QueryRequest):
         mode_override=request.task_mode
     )
 
+    source_filename = (meta_primary or {}).get("filename")
+    source_path = None
+    if request.demo_sample_id:
+        sample = next((s for s in get_demo_samples_list() if s["id"] == request.demo_sample_id), None)
+        if sample:
+            source_path = os.path.join(SAMPLES_DIR, sample["file_primary"])
+    elif request.primary_upload_id:
+        p_info = get_upload(request.primary_upload_id)
+        if p_info and os.path.exists(p_info["temp_path"]):
+            source_path = p_info["temp_path"]
+
+    result["source_context"] = {
+        "request_id": f"qry_{uuid.uuid4().hex[:8]}",
+        "dataset_id": request.demo_sample_id or (request.primary_upload_id or "current_upload"),
+        "sample_id": request.demo_sample_id,
+        "source_filename": source_filename,
+        "source_path": source_path,
+        "source_crs": (meta_primary or {}).get("crs"),
+        "source_dimensions": (meta_primary or {}).get("dimensions"),
+        "source_modality": (meta_primary or {}).get("modality"),
+    }
+
     result["evidence_unavailable"] = False
     query_id = f"qry_{uuid.uuid4().hex[:8]}"
     result["query_id"] = query_id
+    result["source_context"]["request_id"] = query_id
     result["timestamp"] = datetime.utcnow().isoformat()
 
     # Save to Session History & Report Cache
@@ -441,21 +447,9 @@ async def websocket_query_stream(websocket: WebSocket):
         async def stream_callback(step_event):
             await websocket.send_text(json.dumps({"type": "step", "data": step_event}))
 
-        # Mock or load inputs from request
-        primary_arr = np.random.randint(70, 180, (256, 256, 3), dtype=np.uint8)
-        meta_primary = {
-            "crs": "EPSG:4326",
-            "modality": "Optical (Multi-Spectral)",
-            "dimensions": {"width": 256, "height": 256},
-            "affine_transform": [0.0001, 0.0, 77.59, 0.0, -0.0001, 12.97]
-        }
-
-        result = await agent_controller.route_and_execute_stream(
-            query=req_json.get("query", "Analyze scene"),
-            image_primary=primary_arr,
-            mode_override=req_json.get("task_mode"),
-            stream_callback=stream_callback
-        )
+        request = QueryRequest(**req_json)
+        await stream_callback({"step": "Resolving current raster", "detail": "Loading the requested upload or benchmark sample; synthetic stream inputs are disabled."})
+        result = await execute_query(request)
 
         await websocket.send_text(json.dumps({"type": "result", "data": result}))
         await websocket.close()

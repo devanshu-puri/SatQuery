@@ -24,12 +24,12 @@ def test_model_integrity_reports_live_filesystem_state():
     assert 'change_model' in payload
     assert 'fusion_model' in payload
 
-    assert payload['rs_adaptation']['status'] in {'PASS', 'PARTIAL'}
+    assert payload['rs_adaptation']['status'] in {'PASS', 'PARTIAL', 'NOT_AVAILABLE'}
     assert payload['vrsbench_eval']['status'] in {'PASS', 'PARTIAL'}
     assert payload['rsvqa_eval']['status'] in {'PASS', 'PARTIAL'}
     assert payload['cdvqa_eval']['status'] in {'PASS', 'PARTIAL'}
     assert payload['risat_data']['status'] == ('PASS' if real_risat_exists else 'PARTIAL')
-    assert payload['geochat_checkpoint']['status'] in {'PASS', 'PARTIAL'}
+    assert payload['geochat_checkpoint']['status'] in {'PASS', 'PARTIAL', 'FAIL', 'NOT_AVAILABLE'}
     assert payload['change_model']['status'] in {'PASS', 'PARTIAL'}
     assert payload['fusion_model']['status'] in {'PASS', 'PARTIAL'}
 

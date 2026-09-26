@@ -7,7 +7,8 @@ Returns grounded answers, visual evidence crops, and auditable telemetry.
 import time
 from typing import Dict, Any, Optional
 import numpy as np
-from models.geochat_wrapper import GeoChatVLM
+from models.model_manager import ModelManager
+from geospatial.model_preprocessor import prepare_model_image
 from geospatial.raster_parser import generate_preview_base64
 
 class SingleImageVQATool:
@@ -16,7 +17,7 @@ class SingleImageVQATool:
     tool_category = "ai_specialist_model"
 
     def __init__(self):
-        self.vlm = GeoChatVLM(model_id="geochat_7b")
+        self.model_manager = ModelManager.instance()
 
     def run(
         self,
@@ -25,7 +26,8 @@ class SingleImageVQATool:
         metadata: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         start_t = time.perf_counter()
-        result = self.vlm.answer_vqa(rgb_array, query, metadata)
+        image, evidence = prepare_model_image(rgb_array, metadata)
+        result = self.model_manager.generate(image, query)
         elapsed_ms = round((time.perf_counter() - start_t) * 1000, 2)
 
         # Generate real visual evidence preview of the actual crop
@@ -34,13 +36,17 @@ class SingleImageVQATool:
         return {
             "tool_name": self.name,
             "query": query,
-            "answer": result["answer"],
-            "category": result["category"],
-            "confidence_score": result["confidence"],
-            "spectral_diagnostics": result["spectral_diagnostics"],
-            "prompt_sent_to_model": result.get("prompt_sent_to_model"),
-            "low_relevance_warning": result.get("low_relevance_warning", False),
-            "confidence_penalties": result.get("confidence_penalties", []),
+            "answer": result["model_generated_answer"],
+            "model_generated_answer": result["model_generated_answer"],
+            "answer_source": "model_generated",
+            "category": "Real multimodal model inference",
+            "confidence_score": None,
+            "spectral_diagnostics": {},
+            "prompt_sent_to_model": query,
+            "low_relevance_warning": False,
+            "confidence_penalties": [],
+            "evidence": evidence,
+            "model_input_shape": result["model_input_shape"],
             "preview_url": preview_url,
             "internal_latency_ms": elapsed_ms
         }
