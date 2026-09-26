@@ -18,7 +18,7 @@ const ResultsPanel = ({
 
     if (isStreaming) {
         return (
-            <div className="w-1/4 h-full flex flex-col bg-space-900/95 backdrop-blur-xl text-white border-l border-space-700/60 p-5 overflow-y-auto">
+            <div className="results-panel results-loading">
                 <div className="flex items-center gap-2 mb-4 text-xs font-bold text-accent-cyan">
                     <div className="w-4 h-4 border-2 border-accent-cyan border-t-transparent rounded-full animate-spin"></div>
                     <span>Agent Orchestrating Pipeline...</span>
@@ -40,7 +40,7 @@ const ResultsPanel = ({
 
     if (!agentResult) {
         return (
-            <div className="w-1/4 h-full flex flex-col items-center justify-center text-center bg-space-900/95 backdrop-blur-xl text-gray-400 border-l border-space-700/60 p-6">
+            <div className="results-panel results-empty">
                 <FaWandMagicSparkles size={32} className="mb-3 text-accent-cyan/60 animate-bounce" />
                 <h3 className="font-semibold text-white text-sm mb-1">ISRO Multi-Modal AI Ready</h3>
                 <p className="text-xs leading-relaxed text-gray-400">
@@ -51,12 +51,15 @@ const ResultsPanel = ({
     }
 
     const trace = agentResult.execution_trace || {};
-    const confidencePct = Math.round((agentResult.confidence_score || 0.90) * 100);
+    const confidencePct = agentResult.confidence_score == null ? null : Math.round(agentResult.confidence_score * 100);
+    const evidencePreview = agentResult?.preview_url || agentResult?.bitemporal_previews?.t1_url || null;
+    const evidenceSource = agentResult?.source_context?.source_filename || agentResult?.source_context?.dataset_id || 'unavailable';
+    const evidenceRequestId = agentResult?.source_context?.request_id || agentResult?.query_id || 'current-request';
 
     const handleDownloadPdf = async () => {
         setDownloadingPdf(true);
         try {
-            const preview = agentResult.preview_url || primaryUpload?.metadata?.preview_url || selectedDemoSample?.preview_url || sentinelData?.thumb_url;
+            const preview = agentResult.preview_url || null;
             const blob = await downloadPdfReport(agentResult, preview);
             const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
             const link = document.createElement('a');
@@ -89,15 +92,15 @@ const ResultsPanel = ({
     };
 
     return (
-        <div className="w-1/4 h-full flex flex-col bg-space-900/95 backdrop-blur-xl text-white border-l border-space-700/60 p-4 overflow-y-auto">
+        <div className="results-panel">
             {/* Header & Confidence Badge */}
             <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-gray-200">
                     <FaWandMagicSparkles className="text-accent-cyan" /> Multi-Modal AI Results
                 </div>
-                <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-accent-cyan/15 border border-accent-cyan/40 text-accent-cyan text-xs font-bold">
+                {confidencePct !== null && <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-accent-cyan/15 border border-accent-cyan/40 text-accent-cyan text-xs font-bold">
                     <FiCheckCircle className="text-xs" /> {confidencePct}% Conf.
-                </div>
+                </div>}
             </div>
 
             {/* Task & Model Info */}
@@ -110,30 +113,39 @@ const ResultsPanel = ({
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Model Invoked:</span>
-                    <span className="font-medium text-gray-200">{trace.model_invoked || 'GeoChat-7B'}</span>
+                    <span className="font-medium text-gray-200">{trace.model_invoked || 'Not available'}</span>
                 </div>
                 <div className="flex justify-between items-center gap-2">
                     <span className="text-gray-400">Tool Category:</span>
                     <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide ${trace.tool_category === 'classical_rs' ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'}`}>
-                        {trace.tool_category || 'ai_specialist_model'}
+                        {trace.tool_category || 'not available'}
                     </span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Adapter:</span>
-                    <span className="font-mono text-[10px] text-accent-cyan">{trace.adapter_used || 'adapter_a'}</span>
+                    <span className="font-mono text-[10px] text-accent-cyan">{trace.adapter_used || 'Not applied'}</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Latency:</span>
-                    <span className="font-mono text-gray-300">{trace.latency_ms || 320} ms</span>
+                    <span className="font-mono text-gray-300">{trace.latency_ms ?? 'n/a'} ms</span>
                 </div>
             </div>
 
-            {/* AI Textual Analysis */}
+            {/* Human-readable answer in the language detected from the query. */}
             <div className="mb-3">
                 <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1">
-                    Multi-Modal RS-VLM Insights
+                    Answer {agentResult.language_name ? `(${agentResult.language_name})` : ''}
                 </label>
                 <div className="p-2.5 rounded-xl bg-space-950/70 border border-space-800 text-xs text-gray-200 leading-relaxed">
+                    {agentResult.human_summary || agentResult.response}
+                </div>
+            </div>
+
+            <div className="mb-3">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1">
+                    Technical evidence
+                </label>
+                <div className="p-2.5 rounded-xl bg-space-950/70 border border-space-800 text-xs text-gray-300 leading-relaxed whitespace-pre-line">
                     {agentResult.response}
                 </div>
             </div>
@@ -169,14 +181,21 @@ const ResultsPanel = ({
             )}
 
             {/* Visual Evidence Preview */}
-            {(agentResult.preview_url || primaryUpload?.metadata?.preview_url || selectedDemoSample?.preview_url) && (
+            {evidencePreview && (
                 <div className="mb-3">
                     <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1">
                         Visual Evidence Artifact
                     </label>
+                    <div className="mb-2 rounded-lg border border-space-800 bg-space-950/60 p-2 text-[10px] text-gray-300">
+                        <p><span className="text-accent-cyan">Evidence Source:</span> {evidenceSource}</p>
+                        <p><span className="text-accent-cyan">Request:</span> {evidenceRequestId}</p>
+                        <p><span className="text-accent-cyan">Raster:</span> {trace.input_metadata?.primary_dimensions?.width || 'n/a'}x{trace.input_metadata?.primary_dimensions?.height || 'n/a'}</p>
+                        <p><span className="text-accent-cyan">CRS:</span> {trace.input_metadata?.primary_crs || 'n/a'}</p>
+                    </div>
                     <div className="rounded-xl overflow-hidden border border-space-800 bg-space-950 p-1">
                         <img
-                            src={agentResult.preview_url || primaryUpload?.metadata?.preview_url || selectedDemoSample?.preview_url}
+                            key={`${evidenceRequestId}-${evidencePreview.slice(-80)}`}
+                            src={evidencePreview}
                             alt="Visual Evidence"
                             className="w-full aspect-video object-cover rounded-lg"
                         />
@@ -200,6 +219,7 @@ const ResultsPanel = ({
                     <div className="mt-1.5 p-2 rounded-lg bg-space-950 border border-space-800 font-mono text-[10px] text-gray-300 space-y-0.5 overflow-x-auto max-h-32">
                         <p><span className="text-accent-cyan">Task:</span> {trace.task_selected}</p>
                         <p><span className="text-accent-cyan">Decision:</span> {trace.router_decision}</p>
+                        <p><span className="text-accent-cyan">Language / target:</span> {trace.language_name || agentResult.language_name || 'English'} / {trace.target_concept || agentResult.target_concept || 'land cover'}</p>
                         <p><span className="text-accent-cyan">Tools:</span> {trace.tools_executed?.join(', ')}</p>
                         <p><span className="text-accent-cyan">CRS:</span> {trace.input_metadata?.primary_crs}</p>
                     </div>

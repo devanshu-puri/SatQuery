@@ -12,6 +12,7 @@ import asyncio
 from typing import Dict, Any, List, Optional, Callable
 import numpy as np
 from models.registry import ModelRegistry
+from agent.multilingual import interpret_query, localized_summary
 from tools import (
     SingleImageVQATool,
     RegionGroundingTool,
@@ -47,7 +48,8 @@ class AgentController:
         summary = (
             f"Classical RS baseline: vegetation={veg_pct}% | water={water_pct}% | built-up={built_pct}%"
         )
-        return {
+        interpretation = interpret_query(query)
+        result = {
             "query": query,
             "task_type": task_type,
             "status": "PARTIAL",
@@ -74,9 +76,19 @@ class AgentController:
                 "model_invoked": "specialist_unavailable",
                 "tool_category": "classical_rs",
                 "model_category": "classical_rs",
-                "tools_executed": ["ClassicalRSBaseline"]
+                "tools_executed": ["ClassicalRSBaseline"],
+                "language": interpretation["language"],
+                "language_name": interpretation["language_name"],
+                "target_concept": interpretation["target_concept"],
             }
         }
+        result["language"] = interpretation["language"]
+        result["language_name"] = interpretation["language_name"]
+        result["target_concept"] = interpretation["target_concept"]
+        result["human_summary"] = localized_summary(
+            interpretation["language"], task_type, result["extra_stats"], result["response"]
+        )
+        return result
 
     async def route_and_execute_stream(
         self,
@@ -92,7 +104,10 @@ class AgentController:
         Executes routing and tool execution while broadcasting live step-by-step telemetry events.
         """
         start_perf = time.perf_counter()
-        q_lower = query.lower()
+        interpretation = interpret_query(query)
+        # Tools still receive the user's original wording. These hints make routing
+        # language-neutral without translating or altering the evidence request.
+        q_lower = f"{query.lower()} {interpretation['routing_hints']}"
 
         async def emit(step: str, detail: str):
             if stream_callback:
@@ -104,7 +119,6 @@ class AgentController:
 
         # Step 1: Query & Modality Analysis
         await emit("Classifying Query Intent", f"Parsing natural language semantics: '{query[:60]}...'")
-        await asyncio.sleep(0.05)
 
         has_secondary = image_secondary is not None
         modality_primary = metadata_primary.get("modality", "Optical") if metadata_primary else "Optical"
@@ -117,7 +131,7 @@ class AgentController:
         is_temporal_pair = has_secondary and not is_sar_opt_pair
 
         # Independent semantic intent classification (Semantic understanding beyond keywords)
-        if is_sar_opt_pair or any(w in q_lower for w in [
+        if is_sar_opt_pair or interpretation["intent"] == "optical_sar_fusion" or any(w in q_lower for w in [
             "fusion", "sar", "radar", "cross-modal", "all-weather", "optical + sar",
             "optical and sar", "both images", "optical and radar", "backscatter",
             "combine both sensors", "combine both", "both sensors", "both modalities",
@@ -125,7 +139,7 @@ class AgentController:
         ]):
             classified_intent = "optical_sar_fusion"
             intent_rationale = "Cross-modal Optical + SAR radar inputs and/or query requesting multi-sensor fusion."
-        elif is_temporal_pair or any(w in q_lower for w in [
+        elif is_temporal_pair or interpretation["intent"] == "bitemporal_change" or any(w in q_lower for w in [
             "change", "changed", "difference", "compare", "evolution", "before and after",
             "before & after", "temporal", "time interval", "between dates", "before and after images",
             "what happened", "increase", "increased", "decrease", "decreased", "remained unchanged",
@@ -133,7 +147,7 @@ class AgentController:
         ]):
             classified_intent = "bitemporal_change"
             intent_rationale = "Bi-temporal multi-date satellite scenes detected and/or change-detection query semantics."
-        elif any(w in q_lower for w in [
+        elif interpretation["intent"] == "region_grounding" or any(w in q_lower for w in [
             "where", "locate", "ground", "find", "detect", "bounding", "segment",
             "mask", "exact", "exact region", "outline", "box", "show exact",
             "highlight", "mark", "show me", "pinpoint"
@@ -146,7 +160,6 @@ class AgentController:
 
         # Step 2: Compatibility Validation & Task Resolution (Bugs 3 & Error Handling)
         await emit("Validating Input Compatibility", f"Classified Intent: {classified_intent} | Override: {mode_override or 'None'}")
-        await asyncio.sleep(0.05)
 
         intent_tool_mismatch = False
         mismatch_warning = ""
@@ -227,7 +240,6 @@ class AgentController:
             tool_category = "classical_rs"
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} cross-attention weights...")
-            await asyncio.sleep(0.08)
 
             sar_input = image_secondary if image_secondary is not None else (np.mean(image_primary, axis=-1) * 0.8)
             await emit("Executing Cross-Modal Fusion", "Jointly computing optical reflectance & SAR backscatter...")
@@ -264,7 +276,6 @@ class AgentController:
             tool_category = "classical_rs"
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} Siamese weights...")
-            await asyncio.sleep(0.08)
 
             t2_input = image_secondary if image_secondary is not None else np.fliplr(image_primary)
             await emit("Executing Bi-Temporal Change Detection", "Calculating radiometric difference vectors (T1 vs T2)...")
@@ -314,10 +325,9 @@ class AgentController:
             model_name = model_meta["name"]
             adapter_id = model_meta["adapter_id"]
             tool_name = "RegionGroundingTool"
-            tool_category = "ai_specialist_model"
+            tool_category = model_meta.get("tool_category", "classical_rs")
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} region grounding projector...")
-            await asyncio.sleep(0.08)
 
             await emit("Executing Region Grounding & Segmentation", f"Extracting spatial feature clusters for '{query}'...")
             try:
@@ -347,10 +357,9 @@ class AgentController:
             model_name = model_meta["name"]
             adapter_id = model_meta["adapter_id"]
             tool_name = "SingleImageVQATool"
-            tool_category = "ai_specialist_model"
+            tool_category = model_meta.get("tool_category", "classical_rs")
 
             await emit(f"Loading {adapter_id}", f"Binding {model_name} RS-VQA weights...")
-            await asyncio.sleep(0.08)
 
             await emit("Executing RS-VQA Inference", "Performing multi-spectral feature question answering...")
             try:
@@ -373,14 +382,19 @@ class AgentController:
             low_relevance_warning = res.get("low_relevance_warning", False)
             extra_stats = {
                 "category": res.get("category"),
-                "spectral_diagnostics": res.get("spectral_diagnostics")
+                "spectral_diagnostics": res.get("spectral_diagnostics"),
+                "classical_verification": None,
             }
+            model_answer = res.get("model_generated_answer")
+            evidence = res.get("evidence")
 
         # Step 4: Confidence & Trace Assembly (Bug 5 Fix: real perf_counter timing)
-        await emit("Synthesizing Auditable Execution Trace", f"Confidence estimated at {int(confidence * 100)}% | Task: {task_type}")
+        confidence_text = "not directly available" if confidence is None else f"{int(confidence * 100)}%"
+        await emit("Synthesizing Auditable Execution Trace", f"Confidence: {confidence_text} | Task: {task_type}")
         real_latency_ms = round((time.perf_counter() - start_perf) * 1000, 2)
 
-        adapter_folder = model_meta.get("adapter_path", "").split("/")[-1] if model_meta else ""
+        adapter_path = (model_meta or {}).get("adapter_path") or ""
+        adapter_folder = adapter_path.split("/")[-1]
         adapter_runtime = ModelRegistry.get_adapter_runtime_summary(adapter_folder) if adapter_folder else {"adapter_name": adapter_id, "adapter_sha256": None}
         execution_trace = {
             "task_selected": task_type,
@@ -400,19 +414,30 @@ class AgentController:
                 "has_secondary_pair": has_secondary,
                 "secondary_modality": modality_secondary if has_secondary else "None"
             },
-            "confidence_score": round(confidence, 3),
+            "confidence_score": round(confidence, 3) if confidence is not None else None,
             "confidence_penalties": confidence_penalties,
             "prompt_sent_to_model": prompt_sent,
             "low_relevance_warning": low_relevance_warning,
-            "latency_ms": real_latency_ms
+            "latency_ms": real_latency_ms,
+            "model_forward_started": task_type == "single_image_vqa",
+            "model_forward_completed": task_type == "single_image_vqa",
+            "generation_called": task_type == "single_image_vqa",
+            "generation_completed": task_type == "single_image_vqa",
+            "language": interpretation["language"],
+            "language_name": interpretation["language_name"],
+            "target_concept": interpretation["target_concept"],
         }
+        if task_type == "single_image_vqa":
+            execution_trace["input_sha256"] = evidence.get("input_sha256")
+            execution_trace["preprocessed_image_sha256"] = evidence.get("preprocessed_image_sha256")
+            execution_trace["model_input_shape"] = res.get("model_input_shape")
 
         result = {
             "query": query,
             "task_type": task_type,
             "status": "SUCCESS",
             "response": response_text,
-            "confidence_score": round(confidence, 3),
+            "confidence_score": round(confidence, 3) if confidence is not None else None,
             "visual_evidence": visual_evidence,
             "preview_url": preview_url,
             "bitemporal_previews": bitemporal_previews,
@@ -421,8 +446,18 @@ class AgentController:
             "extra_stats": extra_stats,
             "tool_category": tool_category,
             "model_category": model_meta.get("model_category", "ai_specialist_model"),
+            "answer_source": "model_generated" if task_type == "single_image_vqa" else "classical_rs",
+            "model_generated_answer": model_answer if task_type == "single_image_vqa" else None,
+            "classical_verification": None,
+            "evidence": evidence if task_type == "single_image_vqa" else None,
             "execution_trace": execution_trace
         }
+        result["language"] = interpretation["language"]
+        result["language_name"] = interpretation["language_name"]
+        result["target_concept"] = interpretation["target_concept"]
+        result["human_summary"] = localized_summary(
+            interpretation["language"], task_type, extra_stats, response_text
+        )
 
         return result
 

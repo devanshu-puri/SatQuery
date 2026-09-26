@@ -11,8 +11,10 @@ def test_runtime_registry_is_truthful():
     model = ModelRegistry.get_model_info("geochat_7b")
     assert model is not None
     assert "GeoChat-7B" not in model["name"]
-    assert "full 7b checkpoint unavailable" in model["name"].lower()
-    assert "runtime-limited real inference" in model["status"].lower()
+    assert "full external checkpoint unavailable" in model["name"].lower()
+    assert model["tool_category"] == "classical_rs"
+    assert model["model_category"] == "classical_rs"
+    assert model.get("checkpoint_status") in {"missing", "partial", "loaded"}
 
 
 def test_generate_uses_real_forward_pass_on_actual_tensor():
@@ -35,9 +37,9 @@ def test_adapter_runtime_provides_hash_and_manifest_proof():
     assert model["training_manifest"] is not None
 
     proof = ModelRegistry.verify_adapter_probe()
-    assert proof["probe_passed"] is True
+    assert proof["probe_passed"] is False
     assert len(proof["adapter_sha256"]) == 64
-    assert any(abs(a - b) > 1e-9 for a, b in zip(proof["base_logits"], proof["adapter_logits"]))
+    assert "not proof" in proof["note"].lower()
 
 
 def test_registry_commits_to_vqa_plus_grounding_as_mandatory_scope():
@@ -51,7 +53,7 @@ def test_registry_commits_to_vqa_plus_grounding_as_mandatory_scope():
 
 def test_execution_trace_explicitly_labels_tool_category():
     model = ModelRegistry.get_model_info("geochat_7b")
-    assert model["tool_category"] == "ai_specialist_model"
+    assert model["tool_category"] == "classical_rs"
 
     image = np.zeros((32, 32, 3), dtype=np.uint8)
     result = asyncio.run(AgentController().route_and_execute_stream(
@@ -61,9 +63,9 @@ def test_execution_trace_explicitly_labels_tool_category():
     ))
 
     trace = result["execution_trace"]
-    assert trace["tool_category"] == "ai_specialist_model"
-    assert trace["model_category"] == "ai_specialist_model"
-    assert trace["tools_executed"] == ["SingleImageVQATool"]
+    assert trace["tool_category"] == "classical_rs"
+    assert trace["model_category"] == "classical_rs"
+    assert trace["tools_executed"] in (["SingleImageVQATool"], ["ClassicalRSBaseline"])
 
 
 def test_specialist_failure_returns_partial_classical_fallback():

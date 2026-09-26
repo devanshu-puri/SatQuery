@@ -3,8 +3,6 @@ import json
 import hashlib
 from typing import Dict, Any, Optional
 
-import numpy as np
-
 ADAPTERS_DIR = os.path.join(os.path.dirname(__file__), "adapters")
 
 class ModelRegistry:
@@ -55,32 +53,17 @@ class ModelRegistry:
 
     @classmethod
     def verify_adapter_probe(cls) -> Dict[str, Any]:
+        """Report adapter files without manufacturing evidence of adapter injection."""
         adapter_folder = "bigearthnet_lora"
         adapter_meta = cls.get_adapter_runtime_summary(adapter_folder)
-        adapter_path = adapter_meta["adapter_path"]
-        if not adapter_meta["has_adapter_weights"]:
-            raise FileNotFoundError(f"Missing adapter weights for {adapter_folder}: {adapter_path}")
-
-        probe_input = np.zeros((16, 16, 3), dtype=np.float32)
-        probe_input[4:12, 4:12, :] = 255.0
-        base_logits = np.mean(probe_input, axis=(0, 1))
-        digest = adapter_meta["adapter_sha256"] or "0" * 64
-        adapter_shift = np.array([
-            (int(digest[:8], 16) % 250) / 1000.0,
-            (int(digest[8:16], 16) % 250) / 1000.0,
-            (int(digest[16:24], 16) % 250) / 1000.0,
-        ], dtype=np.float32)
-        adapted_logits = base_logits + adapter_shift
-        if np.allclose(base_logits, adapted_logits):
-            raise AssertionError("Adapter sanity probe failed: base and adapter-applied logits were identical.")
-
         return {
             "adapter_name": adapter_folder,
             "adapter_sha256": adapter_meta["adapter_sha256"],
-            "base_logits": [float(v) for v in base_logits.tolist()],
-            "adapter_logits": [float(v) for v in adapted_logits.tolist()],
-            "diff": [float(v) for v in (adapted_logits - base_logits).tolist()],
-            "probe_passed": True,
+            "weights_present": adapter_meta["has_adapter_weights"],
+            "manifest_present": adapter_meta["has_training_manifest"],
+            "probe_passed": False,
+            "status": "NOT_AVAILABLE",
+            "note": "Adapter injection has not run against a compatible loaded base model; file presence and SHA-256 are not proof of application.",
         }
 
     @classmethod
@@ -88,13 +71,13 @@ class ModelRegistry:
         models = {
             "geochat_7b": {
                 "id": "geochat_7b",
-                "name": "GeoChat-style runtime (local TinyRSVisionEncoder; full 7B checkpoint unavailable)",
-                "architecture": "Runtime-limited remote-sensing encoder + prompt-driven analytical wrapper (not a full 7B GeoChat checkpoint)",
+                "name": "Local lightweight remote-sensing vision runtime (full external checkpoint unavailable)",
+                "architecture": "Local CPU-safe vision encoder with pixel-derived remote-sensing measurements; no GeoChat checkpoint is bundled",
                 "domain": "Remote Sensing Multi-Spectral & High-Resolution VQA",
-                "adapter_id": "adapter_a_vqa_grounding",
-                "adapter_path": "models/adapters/geochat_vqa_lora",
-                "tool_category": "ai_specialist_model",
-                "model_category": "ai_specialist_model",
+                "adapter_id": None,
+                "adapter_path": None,
+                "tool_category": "classical_rs",
+                "model_category": "classical_rs",
                 "official_scope": [
                     "Single-Image Visual Question Answering",
                     "Text-Guided Region Grounding (GeoJSON Polygons)"
@@ -104,13 +87,14 @@ class ModelRegistry:
                     "Dense Remote Sensing Scene Captioning (bonus feature, not counted as mandatory scope)"
                 ],
                 "capabilities": [
-                    "Live forward-pass scene classification on the actual cropped tensor",
                     "Single-Image Visual Question Answering",
                     "Text-Guided Region Grounding (GeoJSON Polygons)",
                     "Spectral Land-Use Characterization"
                 ],
-                "parameters": "TinyRSVisionEncoder runtime proxy; 7B checkpoint not loaded in this environment",
-                "status": "Runtime-limited real inference (CPU-safe fallback)"
+                "parameters": "Runtime-derived after a real checkpoint load",
+                "status": "NOT_AVAILABLE",
+                "runtime_status": "NOT_AVAILABLE",
+                "model_family": "local_cpu_safe_runtime"
             },
             "optical_sar_fusion_net": {
                 "id": "optical_sar_fusion_net",
@@ -127,15 +111,15 @@ class ModelRegistry:
                     "High-Dielectric Double-Bounce Urban Delineation",
                     "Cloud-Penetrating Feature Extraction"
                 ],
-                "status": "Ready (Inference Active)"
+                "status": "PARTIAL - Classical optical/SAR verification; no verified BigEarthNet neural runtime"
             },
             "cdvqa_siamese_vlm": {
                 "id": "cdvqa_siamese_vlm",
                 "name": "CDVQA Siamese Change-VLM",
                 "architecture": "Siamese Weight-Shared ViT Encoder + Radiometric Difference Projector + LLaVA-1.5 Captioner",
                 "domain": "Bi-Temporal Satellite Scene Change Analysis (T1 vs T2)",
-                "adapter_id": "adapter_b_change_vqa",
-                "adapter_path": "models/adapters/cdvqa_siamese_lora",
+                "adapter_id": None,
+                "adapter_path": None,
                 "tool_category": "classical_rs",
                 "model_category": "classical_rs",
                 "capabilities": [
@@ -144,10 +128,20 @@ class ModelRegistry:
                     "Spatial Change Clustering & GeoJSON Boundary Delineation",
                     "Seasonal vs Permanent Transition Classification"
                 ],
-                "parameters": "Siamese ViT-B/16 + 18.4M LoRA Adapter Weights",
-                "status": "Ready (Inference Active)"
+                "parameters": "No CDVQA adapter weights are present in this runtime",
+                "status": "PARTIAL - Classical bi-temporal change analysis; no verified CDVQA model runtime"
             }
         }
+
+        from models.model_manager import ModelManager
+        runtime = ModelManager.instance().integrity()
+        models["geochat_7b"].update({
+            "status": runtime["status"],
+            "runtime_status": runtime["status"],
+            "checkpoint_status": "loaded" if runtime["checkpoint_loaded"] else "missing",
+            "checkpoint_path": runtime["checkpoint_path"],
+            "runtime": runtime,
+        })
 
         # Dynamically load on-disk training manifest for BigEarthNet LoRA
         ben_manifest = cls._load_manifest_for_model("optical_sar_fusion_net", "bigearthnet_lora")

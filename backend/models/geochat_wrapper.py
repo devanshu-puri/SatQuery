@@ -93,12 +93,15 @@ class TinyRSVisionEncoder(nn.Module if nn is not None else object):
 
 
 class GeoChatVLM:
-    """Wrapper for Remote Sensing adapted VLM (GeoChat / RS-adapted LLaVA)."""
+    """Wrapper for the currently loaded remote-sensing runtime proxy."""
 
-    def __init__(self, model_id: str = "geochat_7b"):
-        self.model_id = model_id
+    def __init__(self, model_id: str = "tiny_rs_vision_encoder_proxy"):
+        self.official_checkpoint_id = "geochat_7b"
+        self.runtime_id = "tiny_rs_vision_encoder_proxy"
+        self.model_id = model_id if model_id and model_id != "geochat_7b" else self.runtime_id
         self.domain = "Remote Sensing"
         self.device = "cpu"
+        self.runtime_status = "PARTIAL"
         self.model = TinyRSVisionEncoder()
         if torch is not None:
             self.model.eval()
@@ -160,7 +163,7 @@ class GeoChatVLM:
         prompt = (
             f"<s>[INST] <<SYS>>\nYou are the SatQuery RS analysis runtime.\n"
             f"Model runtime: {self.model_id} (local TinyRSVisionEncoder on the actual cropped tensor).\n"
-            f"Full 7B GeoChat checkpoint is not loaded in this environment; the live pass is a CPU-safe real encoder.\n<</SYS>>\n\n"
+            f"Official GeoChat-7B checkpoint is not loaded in this environment; the live pass is a CPU-safe real encoder proxy.\n<</SYS>>\n\n"
             f"[Image]: {rgb_array.shape[0]}x{rgb_array.shape[1]} pixels, query='{query}'\n"
             f"[Features]: brightness={summary['brightness']:.1f}, vegetation={summary['vegetation_pct']}%, water={summary['water_pct']}%, built={summary['built_up_pct']}%\n"
             f"[Prediction]: {top_label} [/INST]"
@@ -319,7 +322,7 @@ class GeoChatVLM:
         prompt_sent_to_model = (
             f"<s>[INST] <<SYS>>\n"
             f"You are the SatQuery RS analytical runtime.\n"
-            f"Runtime model: {self.model_id} using a local TinyRSVisionEncoder; this environment does not load a full 7B GeoChat checkpoint.\n"
+            f"Runtime model: {self.model_id} using a local TinyRSVisionEncoder; no official full-parameter GeoChat-7B checkpoint is loaded here.\n"
             f"<</SYS>>\n\n"
             f"[Context]: Sensor={sensor}, CRS={crs_info}, GSD={gsd_display}m{area_prompt}, "
             f"NIR_Available={'Yes' if has_nir else 'No'}, Veg_Coverage={veg_pct}%, Water_Coverage={water_pct}%, BuiltUp_Coverage={built_pct}%\n"
@@ -541,7 +544,7 @@ class GeoChatVLM:
 
         prompt_sent_to_model = (
             f"<s>[INST] <<SYS>>\nYou are the SatQuery RS analytical runtime.\n"
-            f"Runtime model: {self.model_id} using a local TinyRSVisionEncoder; this environment does not load a full 7B GeoChat checkpoint.\n<</SYS>>\n"
+            f"Runtime model: {self.model_id} using a local TinyRSVisionEncoder; no official full-parameter GeoChat-7B checkpoint is loaded here.\n<</SYS>>\n"
             f"[Task]: Ground and outline '{label}' with bounding boxes. Query: '{query}' [/INST]"
         )
 
